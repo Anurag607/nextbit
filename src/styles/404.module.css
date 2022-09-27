@@ -1,0 +1,29 @@
+.wrapper {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+.wrapper > h1 {
+    background-image: url('/404.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 15rem;
+    font-family: 'Oswald', sans-serif;
+}
+
+.wrapper > p {
+    text-align: center;
+    width: 50rem;
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+}

@@ -1,0 +1,302 @@
+.button {
+    margin: 20.5px 25px 0px 0px;
+    padding: 6px 20px 2px 20px;
+    height: 24px;
+    width: 70px;
+    border-style: solid;
+    border-color: hsla(321, 100%, 78%, 0.696);
+    border-radius: 30px;
+    color: hsla(321, 100%, 78%, 0.696);
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+    border-width: 0.8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.button:hover {
+    box-shadow: 0.5px 0.5px 4px hsla(321, 100%, 78%, 0.688);
+    text-shadow: 0.5px 0.5px 1px hsla(321, 100%, 78%, 0.688);
+}
+
+.txt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    gap: 1rem;
+}
+
+.txt > p {
+    width: 40rem;
+}
+
+.txt::after {
+    content: '';
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.69);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    z-index: 0;
+}
+
+.txt > h1, .txt > p {
+    z-index: 1;
+}
+
+.button1 {
+    background-color: hsl(322, 100%, 66%);
+    border-radius: 25px;
+    transition: 0.35s;
+    color: white;
+    height: 50px;
+    width: 340px;
+    border-color:  hsl(322, 100%, 66%);
+    text-align: center;
+    border: none;
+}
+
+.button1:hover {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.479);
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg img {
+    width: 80%;
+    margin-left: 10%;
+    justify-content: space-evenly;
+}
+
+.bg2 {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100vw;
+}
+
+.bg1,.bg3 {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100vw;
+    background-color: hsl(207, 100%, 98%);
+    flex-wrap: wrap-reverse;
+}
+
+.section2 > p {
+    width: 40rem;
+}
+
+.img_ {
+    width: 25rem;
+    height: 25rem;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    background-color: hsl(192, 100%, 9%);
+    padding: 0 10% 10% 15%;
+    margin: 0;
+    width: 100vw;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    width: 15rem;
+    color: white;
+    padding-top: 5rem;
+}
+
+.contact > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.newsletter {
+    color: white;
+    padding-top: 5rem;
+}
+
+.newsletter > p {
+    width: 30rem;
+}
+
+.separator {
+    margin: 0;
+    padding: 0;
+}
+
+.cont {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.email {
+    border-radius: 10px;
+    border: none;
+    width: 20rem;
+    height: 2.5rem;
+    text-align: left;
+    padding: 10px;
+    cursor: text;
+    margin: 5px;
+}
+
+.submit {
+    border-radius: 0.75rem;
+    border: none;
+    width: 10rem;
+    height: 2.5rem;
+    text-align: left;
+    cursor: pointer;
+    background-color: hsl(322, 100%, 66%);
+    color:hsl(207, 100%, 98%);
+    transition: 0.3s;
+    text-align: center;
+}
+
+.submit:hover {
+    box-shadow: 0 0 0.5rem hsla(321, 100%, 78%, 0.688);
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.contact_ico {
+    width: 40px;
+    height:40px;
+    filter: brightness(0) invert(1);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.contact_ico:hover {
+    filter: none;
+}
+
+.section1 {
+    text-align: center;
+}
+
+.section2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.section2 > button {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-wrap: wrap-reverse;
+    gap: 0.65rem;
+    width: 12.5rem;
+    border-radius: 5rem;
+    outline: none;
+    border-color: transparent;
+    background-color:hsl(234, 100%, 50%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding-block: 0.275rem;
+}
+
+.section2 > button:hover {
+    scale: 1.1;
+}
+
+.section2 > button > span {
+    padding-block: 0.125rem;
+    cursor: pointer;
+}
+
+.arrow {
+    filter: brightness(0) invert(1);
+    cursor: pointer;
+}
+
+.newsletter-msg {
+    font-size: 0.75rem;
+}
+
+.phone-icon, .email-icon {
+    float: left;
+}
+
+.phone-p, .email-p {
+    text-align: right;
+}
+
+.footlogo {
+    filter: brightness(0) invert(1);
+}
+
+@media screen and (max-width: 1000px) {
+    .newsletter {
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .newsletter > form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .footer {
+        padding: 0 0 10% 0;
+    }
+
+    .bg1,.bg2,.bg3 {
+        text-align: center;
+        width: 100vw;
+    }
+
+    .txt {
+        text-align: center;
+    }
+}

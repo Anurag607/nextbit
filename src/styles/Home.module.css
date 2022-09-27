@@ -1,0 +1,160 @@
+.container {
+  padding: 0;
+  margin: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../../public/bg1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.head {
+  color: #ffffff;
+  font-size: 5rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  background: rgba(0,0,0,0.725);
+  mix-blend-mode: overlay;
+  min-width: 100vw;
+  min-height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 4rem;
+  z-index: 1;
+}
+
+.content {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  gap: 3rem;
+  overflow: scroll;
+  align-items: center;
+  min-width: 15vw;
+  height: 100vh;
+  border-right: 1px solid rgba(0,0,0,0.4);
+  padding-block: 1rem;
+}
+
+.sidebar span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border: 1.5px solid rgba(0,0,0,0.225);
+  color: rgba(0,0,0,0.225);
+  border-radius: 10rem;
+  transition: all 0.5s;
+  cursor: pointer;
+  font-size: 1.75rem;
+  font-family: 'Oswald', sans-serif;
+  cursor: pointer;
+}
+
+.sidebar span:hover {
+  padding: 1.255rem 1.75rem;
+  border-color: rgba(0,0,0,0.725);
+  color: rgba(0,0,0,0.725);
+  border-radius: 0;
+}
+
+.active {
+  border-color: rgba(0,0,0,0.725);
+  color: rgba(0,0,0,0.725);
+  border-radius: 0rem;
+}
+
+.inactive {
+  border-color: rgba(0,0,0,0.225);
+  color: rgba(0,0,0,0.225);
+  border-radius: 10rem;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 55vw;
+  min-height: 100vh;
+  border-right: 1px solid rgba(0,0,0,0.4);
+}
+
+.post > div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70vh;
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+  transition: all 0.5s;
+}
+
+.post > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30vh;
+  transition: all 0.5s;
+}
+
+.post > div:nth-child(2) > span {
+  text-align: center;
+  font-family: 'Prompt', sans-serif;
+  font-size: 3rem;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  transition: all 0.5s;
+}
+
+.posttext {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 25vw;
+  min-height: 100vh;
+  padding: 3rem 1rem 5rem 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.posttext > span:nth-child(2) {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+  padding-left: 1.5rem;
+}
+
+.posttext > span:nth-child(2):hover {
+  scale: 1.1;
+}
+
+/* @media (prefers-color-scheme: dark) {
+} */
