@@ -6,31 +6,24 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../src/styles/blogpages.module.css'
 
-function getKey(object: object, value: string | string[]) {
-    let Key: string;
-    Object.keys(object).map(key => {
-        if (object[`${key}`] == value) {
-            Key = key;
-        }
-    })
-    return Key;
-}
-
-const Page = (props: any) => {
+const Page = ( {posts} ) => {
     const router = useRouter()
-    
     const { id } = router.query
 
     return (
         <>
             <Head>
+                <meta name="description" content="#" />
+                <meta name="keywords" content="#" />
+                <meta name="author" content="Deep" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
                 <title>{id}</title>
             </Head>
             
-            <div className={styles.txt} style={{backgroundImage: `url("${props.bgimages[getKey(props.title, id)]}")`}}>
+            <div className={styles.txt} style={{backgroundImage: `url("${posts.bgimages}")`}}>
                 <h1>{id}</h1>
                 <p>
-                    {props.placeholder['one']}
+                    {posts.placeholder}
                 </p>
                 <br />
             </div>
@@ -42,7 +35,7 @@ const Page = (props: any) => {
                     <section className={styles.section2}>
                         <h1>Title 1</h1>
                         <p>
-                            {props.placeholder['one']}
+                            {posts.placeholder}
                         </p>
                         <Link href='#'>
                             <button>
@@ -64,7 +57,7 @@ const Page = (props: any) => {
                     <section className={styles.section2}>
                         <h1>Title 2</h1>
                         <p>
-                            {props.placeholder['one']}
+                            {posts.placeholder}
                         </p>
                         <Link href='#'>
                             <button>
@@ -80,7 +73,7 @@ const Page = (props: any) => {
                     <section className={styles.section2}>
                         <h1>Title 3</h1>
                         <p>
-                            {props.placeholder['one']}
+                            {posts.placeholder}
                         </p>
                         <Link href='#'>
                             <button>
@@ -120,11 +113,11 @@ const Page = (props: any) => {
                     <section className={styles.newsletter}>
                         <h1>NEWSLETTER</h1>
                         <p className={styles['newsletter-msg']}>
-                            {props.placeholder['one']}
+                            {posts.placeholder}
                         </p><br />
                         <form>
                             <input type="email" className={styles.email} name="email" placeholder="example@gmail.com" />
-                            <Link href='./sub'>
+                            <Link href='/sub'>
                                 <input type="submit" value="Subscribe" className={styles.submit} />
                             </Link>
                         </form>
@@ -133,6 +126,26 @@ const Page = (props: any) => {
             </div>
         </>
     )
+}
+
+export async function getServerSideProps( {params,req,res} ) {
+    const response = await fetch(`${process.env.API_URL}/api/blog/${params.id}`)
+    if (!response.ok) {
+        res.writeHead(302, {Location: '/nf'}).end()
+        return {
+            props : {}
+        }
+    }
+
+    const data = await response.json()
+    
+    if (data) {
+        return {
+            props : {
+                posts: data
+            }
+        }
+    }
 }
 
 export default Page

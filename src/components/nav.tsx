@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../../src/styles/nav.module.css'
-import search from '../../src/scripts/searchbar.mjs'
+import search from '../scripts/searchbar.mjs'
 
 const Nav = (props: any) => {
     return (

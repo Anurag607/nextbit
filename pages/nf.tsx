@@ -1,18 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import styles from '../src/styles/notfound.module.css'
 
 const Page = () => {
-
-    const router = useRouter()
-
-    const {url} = router.query
-
-    let Title = url
-
-    if (url === "404") Title = "404"
 
     return (
         <div className={styles.wrapper}>
@@ -21,7 +12,7 @@ const Page = () => {
                 <meta name="keywords" content="#" />
                 <meta name="author" content="Deep" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-                <title>{Title}</title>
+                <title>404: Not Found</title>
             </Head>
             <h1>404</h1>
             <p>Oops! The Page you are looking for might have been removed, had it's name changed or is temporarily unavailabe.</p>

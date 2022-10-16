@@ -13,7 +13,7 @@ const Page = () => {
 
     return (
         <div className={styles.wrapper}>
-            <Image className={styles.img} src="/email.png" alt="letter" width={300} height={300 }/>
+            <Image className={styles.img} src="/email.png" alt="letter" width={300} height={300} />
             <h1>Thank You for Subscribing!</h1>
             <h2>Hi Anurag Goswami,</h2>
             <p>We are incredibly exicited to have you here.</p>
