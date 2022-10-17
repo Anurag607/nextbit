@@ -11,7 +11,7 @@ const Page = () => {
                 <meta name="description" content="#" />
                 <meta name="keywords" content="#" />
                 <meta name="author" content="Deep" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>404: Not Found</title>
             </Head>
             <h1>404</h1>

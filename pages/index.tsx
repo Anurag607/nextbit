@@ -97,25 +97,27 @@ function Home( {posts} ) {
       
       <div className={styles.content}>
 
-      <Page />
+        <Page />
 
-        <section className={styles.post}>
-          <div>
-            <Image src={post.image} alt={post.title} width={650} height={375} />
-          </div>
-          <div>
-            <span> {post.title} </span>
-          </div>
-        </section>
-        
-        <section className={styles.posttext}>
-          <span>{post.content}</span>
+        <section className={styles.postBody}>
+          <section className={styles.post}>
+            <div>
+              <Image src={post.image} alt={post.title} width={650} height={375} layout='intrinsic' />
+            </div>
+            <div>
+              <span> {post.title} </span>
+            </div>
+          </section>
+          
+          <section className={styles.posttext}>
+            <p>{post.content}</p>
             <Link href={post.path} as={post.link}>
               <span>
                 Read More
-                <Image src="/right-arrow.svg" alt="right-arrow" width={29} height={29} />
+                <Image src="/right-arrow.svg" alt="right-arrow" width={29} height={29} layout='intrinsic' />
               </span>
             </Link>
+          </section>
         </section>
 
       </div>

@@ -1,3 +1,8 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+}
+
 .button {
     margin: 20.5px 25px 0px 0px;
     padding: 6px 20px 2px 20px;
@@ -26,8 +31,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
@@ -35,7 +40,7 @@
 }
 
 .txt > p {
-    width: 40rem;
+    width: 75%;
 }
 
 .txt::after {
@@ -46,8 +51,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: rgba(0,0,0,0.69);
     background-repeat: no-repeat;
     background-size: cover;
@@ -292,11 +297,22 @@
     }
 
     .bg1,.bg2,.bg3 {
-        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
         width: 100vw;
     }
-
-    .txt {
+    
+    .section2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
         text-align: center;
+    }
+
+    .bg1, .bg3 {
+        flex-direction: column-reverse;
     }
 }

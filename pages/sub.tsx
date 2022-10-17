@@ -13,7 +13,14 @@ const Page = () => {
 
     return (
         <div className={styles.wrapper}>
-            <Image className={styles.img} src="/email.png" alt="letter" width={300} height={300} />
+            <Head>
+                <meta name="description" content="#" />
+                <meta name="keywords" content="#" />
+                <meta name="author" content="Deep" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Thank You! for Subscribing</title>
+            </Head>
+            <Image className={styles.img} src="/email.png" alt="letter" width={200} height={200} layout='intrinsic' />
             <h1>Thank You for Subscribing!</h1>
             <h2>Hi Anurag Goswami,</h2>
             <p>We are incredibly exicited to have you here.</p>

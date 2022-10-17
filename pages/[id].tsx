@@ -15,7 +15,7 @@ const Page = ( {posts} ) => {
     }, [id, router])
 
     return (
-        <>
+        <div className={styles.wrapper}>
             <Head>
                 <meta name="description" content="#" />
                 <meta name="keywords" content="#" />
@@ -128,7 +128,7 @@ const Page = ( {posts} ) => {
                     </section>
                 </footer>
             </div>
-        </>
+        </div>
     )
 }
 

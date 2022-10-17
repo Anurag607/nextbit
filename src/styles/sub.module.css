@@ -5,8 +5,8 @@
     align-items: center;
     gap: 0.5rem;
     font-family: 'Poppins', sans-serif;
-}
-
-.img {
-    width: 12.5rem;
+    width: 100vw;
+    height: 80vh;
+    text-align: center;
+    padding: 0 0.5rem;
 }

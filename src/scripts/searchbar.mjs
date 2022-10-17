@@ -7,12 +7,14 @@ const search = () => {
         searchbar.style.width = '12.5rem'
         searchbar.style.opacity = '1'
         searchbar.style.transitionTimingFunction = 'ease-out'
+        searchbar.style.cursor = "text"
     }
     else {
         searchico.dataset.switch = 'off'
         searchbar.style.width = '0rem'
         searchbar.style.opacity = '0'
         searchbar.style.transitionTimingFunction = 'ease-in'
+        searchbar.style.cursor = "default"
     }
 }
 
