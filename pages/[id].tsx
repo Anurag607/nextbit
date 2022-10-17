@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -9,6 +9,10 @@ import styles from '../src/styles/blogpages.module.css'
 const Page = ( {posts} ) => {
     const router = useRouter()
     const { id } = router.query
+
+    useEffect(() => {
+        if(id === '404') router.push('/nf', '/404', {shallow: true})
+    }, [id, router])
 
     return (
         <>

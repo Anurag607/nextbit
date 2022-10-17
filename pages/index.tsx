@@ -55,7 +55,7 @@ function Home( {posts} ) {
         content: ` `,
         current: `${legend[e.target.innerHTML]}`,
         link: `./404`,
-        path: `./[...params]`
+        path: `./nf`
       })
     }
   }

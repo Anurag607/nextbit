@@ -1,18 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import styles from '../src/styles/notfound.module.css'
 
 const Page = () => {
 
-    const router = useRouter()
+    // const router = useRouter()
 
-    const {url} = router.query
-
-    let Title = url
-
-    if (url === "404") Title = "404"
+    let Title = "404 : Page Not Found"
 
     return (
         <div className={styles.wrapper}>

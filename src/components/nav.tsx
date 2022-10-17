@@ -3,10 +3,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../../src/styles/nav.module.css'
 import search from '../scripts/searchbar.mjs'
+import Head from 'next/head'
 
 const Nav = (props: any) => {
     return (
         <nav className={styles.nav}>
+            <Head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+            </Head>
             <Link href='/'>
                 <a className={styles.headlink}>
                     <Image src="/nb.png" alt="Vercel Logo" width={72} height={72} className={styles.logo} />

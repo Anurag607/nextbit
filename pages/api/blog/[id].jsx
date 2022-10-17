@@ -15,7 +15,7 @@ const handler = nc()
         for (let i = 0; i < id.length; i++) {
             if(i == 0) topic += id[i]
             if(i == 0 && id.length > 1) topic += " "
-            else topic += id[i]+" "
+            if(i > 0 && id.length > 1) topic += id[i]+" "
         }
 
         topic = topic.trim()
@@ -26,13 +26,8 @@ const handler = nc()
                 break
             }
         }
-        
-        for(const [k,v] of Object.entries(blogData[0].placeholder)) {
-            if(k === key) {
-                dummy = v
-                break
-            }
-        }
+
+        dummy = blogData[0].placeholder.one
 
         for(const [k,v] of Object.entries(blogData[0].bgimages)) {
             if(k === key) {
