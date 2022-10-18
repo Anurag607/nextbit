@@ -127,7 +127,7 @@ function Home( {posts} ) {
 }
 
 export async function getServerSideProps( {params, req, res} ) {
-  const response = await fetch(`${process.env.API_URL}/api/blog/`)
+  const response = await fetch(`${process.env.API_URL1}/api/blog/`)
   if (!response.ok) {
     res.writeHead(302, {Location: '/nf'}).end()
     return {

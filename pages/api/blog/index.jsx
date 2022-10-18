@@ -1,7 +1,7 @@
 import nc from 'next-connect'
 import blogData from "../../../src/data/data"
 
-const port = process.env.API_URL
+const port = process.env.API_URL1 || process.env.API_URL2 || process.env.API_URL3
 
 const handler = nc()
     .get(async(req, res) => {
