@@ -9,7 +9,6 @@ import parseCookies from '../../src/scripts/cookieParser.mjs'
 import Cookie from 'js-cookie'
 import { CloudImage } from '../../pages/api/cloudinary/CloudImage'
 import _ from 'lodash/debounce'
-import { NextApiRequest } from 'next'
 import Loader from '../../src/components/loader'
 
 const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cookieIntro} ) => {
@@ -173,7 +172,7 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
                             <label htmlFor={"introImage"}>{"Introductory Image/Illustration : "}</label>
                             <span>
                                 <input type="file" id="introImage" name="introImage" accept="image/*" onChange={HandleChange} required />
-                                <a href="https://www.freepik.com/" target="_blank">*For referrence you can search on <b>freepik.com</b></a>
+                                <a href="https://www.freepik.com/" target="_blank" rel="noreferrer">*For referrence you can search on <b>freepik.com</b></a>
                             </span>
                         </div>
                         <Loader />
@@ -184,7 +183,7 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
                             <label htmlFor={"bgImage"}>{"Background Image for Hero Section of the Blog : "}</label>
                             <span>
                                 <input type="file" id="bgImage" name="bgImage" accept="image/*" onChange={HandleChange} required />
-                                <a href="https://unsplash.com/" target="_blank">*For referrence you can search on <b>unsplash.com</b></a>
+                                <a href="https://unsplash.com/" target="_blank" rel="noreferrer">*For referrence you can search on <b>unsplash.com</b></a>
                             </span>
                         </div>
                         <Loader />

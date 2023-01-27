@@ -10,7 +10,6 @@ import parseCookies from '../../src/scripts/cookieParser.mjs'
 import Cookie from 'js-cookie'
 import { CloudImage } from '../api/cloudinary/CloudImage'
 import _ from 'lodash/debounce'
-import { NextApiRequest } from 'next'
 import {postType} from '../../src/utils/postType'
 
 const CustomEditor = dynamic(()=>import('../../src/components/customEditor'),{ssr:false})
@@ -197,7 +196,7 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
                             <label htmlFor={"introImage"}>{"Introductory Image/Illustration : "}</label>
                             <span>
                                 <input type="file" id="introImage" name="introImage" accept="image/*" onChange={HandleChange} />
-                                <a href="https://www.freepik.com/" target="_blank">*For referrence you can search on <b>freepik.com</b></a>
+                                <a href="https://www.freepik.com/" target="_blank" rel="noreferrer">*For referrence you can search on <b>freepik.com</b></a>
                             </span>
                         </div>
                         <div className={`${styles.uploadedImg} uploadedIntroImg`} style={{backgroundImage: `url('${introImageURL}')`}}/>
@@ -207,7 +206,7 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
                             <label htmlFor={"bgImage"}>{"Background Image for Hero Section of the Blog : "}</label>
                             <span>
                                 <input type="file" id="bgImage" name="bgImage" accept="image/*" onChange={HandleChange} />
-                                <a href="https://unsplash.com/" target="_blank">*For referrence you can search on <b>unsplash.com</b></a>
+                                <a href="https://unsplash.com/" target="_blank" rel="noreferrer">*For referrence you can search on <b>unsplash.com</b></a>
                             </span>
                         </div>
                         <div className={`${styles.uploadedImg} uploadedBgImg`} style={{backgroundImage: `url('${bgImageURL}')`}} />

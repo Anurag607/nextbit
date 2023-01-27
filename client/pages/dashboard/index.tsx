@@ -7,6 +7,7 @@ import parseCookies from '../../src/scripts/cookieParser.mjs'
 import {userDetails} from '../../src/utils/userDetails'
 import {useRouter} from 'next/router'
 import { postType } from '../../src/utils/postType'
+import Image from 'next/image'
 
 const Dashboard = ({auth, posts}: {auth: string, posts:postType[]}) => {
 
@@ -66,7 +67,7 @@ const Dashboard = ({auth, posts}: {auth: string, posts:postType[]}) => {
         </div>
         <Link href='/home' as='/home' passHref>
           <a id='logout' className={styles.home}>
-            <img src='/home.png' alt='logout' />
+            <Image src='/home.png' alt='home' width={32} height={32} />
             <span>Home</span>
           </a>
         </Link>
@@ -75,7 +76,7 @@ const Dashboard = ({auth, posts}: {auth: string, posts:postType[]}) => {
             Cookie.remove('currentLoggedIn', {path: ''})
             router.push('/home', '/home', {shallow: true})
           }}>
-            <img src='/logout.svg' alt='logout' />
+            <Image src='/logout.svg' alt='logout' width={32} height={32} />
             <span>Logout</span>
           </a>
         </Link>
@@ -90,7 +91,7 @@ const Dashboard = ({auth, posts}: {auth: string, posts:postType[]}) => {
           </div>
           <Link href='/home' as='/home' passHref>
             <a id='logout' className={styles.home}>
-              <img src='/home.png' alt='logout' />
+              <Image src='/home.png' alt='home' width={32} height={32} />
               <span>Home</span>
             </a>
           </Link>
@@ -99,13 +100,13 @@ const Dashboard = ({auth, posts}: {auth: string, posts:postType[]}) => {
               Cookie.remove('currentLoggedIn', {path: ''})
               router.push('/home', '/home', {shallow: true})
             }}>
-              <img src='/logout.svg' alt='logout' />
+              <Image src='/logout.svg' alt='logout' width={32} height={32} />
               <span>Logout</span>
             </a>
           </Link>
         </div>
         <div className={styles.header}>
-          <img src='/right-arrow.png' alt='right-arrow' />
+          <Image src='/right-arrow.png' alt='right-arrow' height={32} width={32} />
           <div>
             <p>Hi {userDetails.username},</p>
             <span>Welcome Back!</span>

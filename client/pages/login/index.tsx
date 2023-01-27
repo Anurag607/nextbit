@@ -88,13 +88,13 @@ export default function Login() {
                 router.back()
             }
         })
-    },[logindet])
+    },[logindet]) // eslint-disable-line
 
     React.useEffect(() => {
         let recentURL = document.referrer.split('/')
         router.prefetch(`/${recentURL[recentURL.length - 1]}`)
         if(Cookie.get('currentLoggedIn') !== undefined && Cookie.get('currentLoggedIn').hasOwnProperty('username')) router.push('/home', '/home', {shallow: true})
-    },[])
+    },[]) // eslint-disable-line
 
     return (
         <main className={styles.loginWrapper}>

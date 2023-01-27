@@ -51,7 +51,7 @@ function Home( {posts, userDetails} ) {
     Cookie.remove('introContent', {path: ''})
     Cookie.remove('post_id', {path: ''})
     console.log(userDetails)
-  }, [])
+  }, []) // eslint-disable-line
 
   React.useEffect(() => {
     menu()

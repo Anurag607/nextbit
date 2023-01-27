@@ -58,7 +58,7 @@ const CustomEditor = (props:propType) => {
       }
     }
 
-  }, []);
+  }, []); // eslint-disable-line
      
   const onFileChange = async (file:File) => {
   
