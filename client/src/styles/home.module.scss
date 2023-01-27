@@ -1,0 +1,480 @@
+.container {
+  padding: 0;
+  margin: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.heroSection {
+  min-width: 100vw;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap-reverse;
+}
+
+.heroContent {
+  min-width: 40vw;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.mockupCont {
+  min-width: 50vw;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  background-image: url('../../public/blog-writer.png');
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin-block: 2rem;
+}
+
+.heading {
+  color: #282c35;
+  font-size: 4rem;
+  font-weight: bold;
+  font-family: 'Work Sans', sans-serif;
+  max-width: 23.5rem;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  z-index: 1;
+}
+
+.heroMsg {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  padding-bottom: 2.5rem;
+}
+
+.getStartedbtn {
+  width: 20rem;
+  height: 3rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  border-radius: 5rem;
+  border-color: transparent;
+  cursor: pointer;
+  background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 200% 200%;
+  color: #ffffff;
+  text-shadow: 0 0 0.5rem rgba(0,0,0,0.5);
+}
+
+.getStartedbtn:hover {
+  -webkit-animation: gradient 10s ease infinite;
+  animation: gradient 10s ease infinite;
+}
+
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0.5% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0.5% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.content {
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+  border-top: 0.05rem solid rgba(0,0,0,0.125);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 3rem;
+  overflow-y: scroll;
+  align-items: center;
+  min-width: 15vw;
+  height: 63vh;
+  padding-block: 1rem;
+}
+
+.sidebar span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0,0,0,0.225);
+  transition: all 0.5s;
+  cursor: pointer;
+  font-size: 2rem;
+  font-family: 'Oswald', sans-serif;
+  cursor: pointer;
+}
+
+.sidebar span:hover {
+  color: rgba(0,0,0,0.725);
+}
+
+.active {
+  color: rgba(0,0,0,0.725);
+}
+
+.inactive {
+  color: rgba(0,0,0,0.225);
+}
+
+.postBody {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 55vw;
+  min-height: 100vh;
+  border-right: 0.05rem solid rgba(0,0,0,0.125);
+}
+
+.postHeader {
+  width: 85%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(0,0,0,0.35);
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding-bottom: 1.5rem;
+  margin-top: 2rem;
+  cursor: default;
+}
+
+.postHeader > span {
+  width: 0.3rem;
+  height: 0.3rem;
+  margin-top: 0.1rem;
+  border-radius: 100%;
+  background-color: #fd1694;
+}
+
+.postAuthor {
+  text-transform: capitalize;
+}
+
+.postTitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 85%;
+  color: #282c35;
+  text-align: left;
+  font-family: sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  cursor: default;
+  padding-bottom: 3rem;
+}
+
+.postImage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 35rem;
+  height: 17.5rem;
+  transition: all 0.5s;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 1.5rem;
+}
+
+.posttext {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  min-width: 25vw;
+  min-height: 100vh;
+  padding: 2rem 1rem 5rem 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+}
+
+.postTextHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.postTextHeader > span:nth-child(1) {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 100%;
+  background-color: #0f52ba;
+}
+
+.readMore {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+  padding-left: 1.5rem;
+  margin-top: 5%;
+}
+
+.goIcon {
+  padding-top: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.posttext > span:hover .goIcon {
+  translate: 0.25rem 0;
+}
+
+/* @media (prefers-color-scheme: dark) {
+} */
+
+@media screen and (max-width : 1000px) {
+  .heroContent {
+    width: 100vw;
+    z-index: 100;
+    color: #ffffff;
+  }
+
+  .mockupCont {
+    position: absolute;
+    background-image: url('../../public/blog.jpg');
+    filter: brightness(25%);
+    width: 100vw;
+    height: 90vh;
+  }
+
+  .heroSection, .heroContent {
+    align-items: center;
+    text-align: center;
+  }
+
+  .heading, .heroMsg {
+    color: #ffffff;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .content {
+    flex-direction: column-reverse;
+  }
+
+  .postHeader {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .postTitle {
+    font-size: 2rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .postBody {
+    flex-direction: column;
+    margin-bottom: 5rem;
+  }
+
+  .post {
+    padding-top: 2rem;
+    border-right: none;
+  }
+
+  .posttext {
+    align-items: center;
+    text-align: center;
+    min-height: 75vh;
+    padding: 0.5rem 1rem 0rem 1rem;
+  }
+
+  .posttext > span:nth-child(2) {
+    justify-content: center;
+    gap: 0.5rem;
+    padding-left: 0;
+    margin-top: 0;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    justify-content: center;
+    height: auto;
+    min-width: 0;
+    width: 100vw;
+    padding-block: 0rem;
+    border-right: none;
+    padding-block: 1rem;
+    margin-right: 1rem;
+  }
+
+  .readMore {
+    justify-content: center;
+    margin-right: 1rem;
+  }
+}
+
+.empty-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.empty-wrapper > div {
+  width: 100vw;
+  height: 50vh;
+  background-image: url('../../public/noPost.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.empty-wrapper > p {
+  text-align: center;
+  width: 62.5%;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+@media screen and (max-width: 775px) {
+  .empty-wrapper > p {
+      font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .heading {
+    font-size: 3rem;
+  }
+  .heroMsg {
+    font-size: 1rem;
+  }
+  .getStartedbtn {
+    width: 15rem;
+    font-size: 1.25rem;
+  }
+  .postTitle {
+    font-size: 1.75rem;
+  }
+  .postImage {
+    width: 32.5rem;
+    height: 17.5rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .heading {
+    font-size: 2rem;
+  }
+  .heroMsg {
+    font-size: 0.85rem;
+  }
+  .getStartedbtn {
+    width: 12.5rem;
+    font-size: 1.25rem;
+  }
+  .posttext {
+    p {
+      padding-inline: 0.65rem;
+      // width: 100vw;
+      font-size: 0.85rem;
+    }
+  }
+  .postImage {
+    width: 25rem;
+    height: 17.5rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .heading {
+    font-size: 2rem;
+  }
+  .heroMsg {
+    font-size: 0.85rem;
+  }
+  .getStartedbtn {
+    width: 12.5rem;
+    font-size: 1.25rem;
+  }
+  .postBody {
+    gap: 3rem;
+  }
+  .post {
+    min-height: 35vh;
+  }
+  .posttext {
+    gap: 1rem;
+    min-height: 45vh;
+  }
+  .postTitle {
+    padding-inline: 0.5rem;
+    font-size: 1.25rem;
+  }
+  .postImage {
+    width: 18.5rem;
+    height: 10.5rem;
+  }
+}
+
+@media screen and (max-width: 365px) {
+    .postHeader {
+      flex-direction: column
+    }
+}

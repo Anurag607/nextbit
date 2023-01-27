@@ -1,0 +1,48 @@
+/* -----------------------------------PRELOADER-------------------------------------*/
+
+@mixin flex($dir : row, $gap: 0rem) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: center;
+    align-items: center;
+    gap: $gap;
+}
+
+@mixin bg($url : '') {
+    background-image: url($url);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.preloader {
+    z-index: 10000;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s;
+    opacity: 1;
+}
+
+.nb {
+    background: #ffffff;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #37474f;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include flex;
+    img {
+        width: 5rem;
+    }
+}

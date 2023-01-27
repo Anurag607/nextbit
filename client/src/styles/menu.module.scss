@@ -1,0 +1,96 @@
+.menu1 {
+    width: 52px;
+    height: 52px;
+    background: transparent;
+    margin-left: 20px;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: all 0.5s;
+    z-index: 1000;
+    position: relative;
+}
+
+.menu1 div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 70%;
+    transition: all 0.5s;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+}
+
+.menu_bar1, .menu_bar2, .menu_bar3 {
+    position: absolute;
+    background: white;
+    width: 100%;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    transition: all 0.5s;
+    display: inline-block;
+}
+
+.menu1 .menu_bar1 {
+    width: 50%;
+    transform: translate(-100%, -11.5px);
+    transform-origin: 100% 0;
+}
+
+.menu1 .menu_bar2 {
+    width: 100%;
+    transform: translate(-50%, 0.4px);
+}
+
+.menu1 .menu_bar3 {
+    width: 50%;
+    transform: translate(0, 11.5px);
+    transform-origin: 0 100%;
+}
+
+.menu1 .overlay {
+    position: absolute;
+    width: 52px;
+    height: 0;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: all 0.3s;
+    z-index: -1;
+    background: linear-gradient(to right, #e91e63, #f44336);
+}
+
+.menu1:hover .overlay {
+    height: 52px;
+}
+
+.open .menu_bar1 {
+    width: 100%;
+    transform: translate(-66%, -11.5px) rotate(-45deg);
+}
+
+.open .menu_bar2 {
+    width: 0;
+}
+
+.open .menu_bar3 {
+    width: 100%;
+    transform: translate(-35%, -12.5px) rotate(45deg);
+}
+
+/* .menu1:hover .menu_bar1 {
+    width: 100%;
+    transform: translate(-66%, -11.5px) rotate(-45deg);
+}
+
+.menu1:hover .menu_bar2 {
+    width: 0;
+}
+
+.menu1:hover .menu_bar3 {
+    width: 100%;
+    transform: translate(-35%, -12.5px) rotate(45deg);
+} */

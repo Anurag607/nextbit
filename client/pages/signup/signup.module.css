@@ -1,0 +1,261 @@
+/* ----------------------------------SIGN UP-------------------------------------*/
+.signupWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0rem;
+  background-color: #fff;
+}
+.signupWrapper section:nth-child(1) {
+  width: 60vw;
+  height: 100vh;
+  background-image: url("../../public/casual1.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.signupWrapper section:nth-child(2) {
+  z-index: 1;
+  width: 40vw;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0rem;
+}
+.signupWrapper section:nth-child(2) form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.signupWrapper section:nth-child(2) form h2 {
+  font-family: "Michroma", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  color: rgba(0, 0, 0, 0.75);
+}
+.signupWrapper section:nth-child(2) form .warning, .signupWrapper section:nth-child(2) form .warning1 {
+  display: none;
+  border: transparent;
+  outline: none;
+  background: red;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  cursor: default;
+}
+.signupWrapper section:nth-child(2) form span {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+}
+.signupWrapper section:nth-child(2) form span:nth-child(1) {
+  padding-bottom: 0.25rem;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: 0.05rem solid rgba(0, 0, 0, 0.25);
+}
+.signupWrapper section:nth-child(2) form .tologin {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-family: "Poppins", sans-serif;
+  cursor: default;
+}
+.signupWrapper section:nth-child(2) form label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+.signupWrapper section:nth-child(2) form label .user {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0rem;
+  width: auto;
+  height: auto;
+}
+.signupWrapper section:nth-child(2) form label .user span {
+  width: 2rem;
+  height: 1.95rem;
+  background-image: url("../../public/user (1).png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(0) opacity(0.75);
+  border-top: transparent;
+  border-left: transparent;
+  border-right: 0.05rem solid rgba(0, 0, 0, 0.25);
+  border-bottom: transparent;
+}
+.signupWrapper section:nth-child(2) form label .user input {
+  outline: none;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  width: 15rem;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  border-radius: 0.5rem;
+  margin-left: 0.25rem;
+}
+.signupWrapper section:nth-child(2) form label .phnum {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0rem;
+  width: auto;
+  height: auto;
+}
+.signupWrapper section:nth-child(2) form label .phnum span {
+  width: 2rem;
+  height: 1.95rem;
+  background-image: url("../../public/phone.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(0) opacity(0.75);
+  border-top: transparent;
+  border-left: transparent;
+  border-right: 0.05rem solid rgba(0, 0, 0, 0.25);
+  border-bottom: transparent;
+}
+.signupWrapper section:nth-child(2) form label .phnum input {
+  outline: none;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  width: 15rem;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  border-radius: 0.5rem;
+  margin-left: 0.25rem;
+}
+.signupWrapper section:nth-child(2) form label .signupemail {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0rem;
+  width: auto;
+  height: auto;
+}
+.signupWrapper section:nth-child(2) form label .signupemail span {
+  width: 2rem;
+  height: 1.95rem;
+  background-image: url("../../public/email.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(0) opacity(0.75);
+  border-top: transparent;
+  border-left: transparent;
+  border-right: 0.05rem solid rgba(0, 0, 0, 0.25);
+  border-bottom: transparent;
+  border-radius: 0;
+  padding-right: 0.5rem;
+}
+.signupWrapper section:nth-child(2) form label .signupemail input {
+  outline: none;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  width: 15rem;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  border-radius: 0.5rem;
+  margin-left: 0.25rem;
+}
+.signupWrapper section:nth-child(2) form label .pass {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0rem;
+  width: auto;
+  height: auto;
+}
+.signupWrapper section:nth-child(2) form label .pass span {
+  width: 2rem;
+  height: 1.9rem;
+  background-image: url("../../public/lock.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(0) opacity(0.75);
+  border-top: transparent;
+  border-left: transparent;
+  border-right: 0.05rem solid rgba(0, 0, 0, 0.25);
+  border-bottom: transparent;
+}
+.signupWrapper section:nth-child(2) form label .pass input {
+  outline: none;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  width: 15rem;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  border-radius: 0.5rem;
+  margin-left: 0.25rem;
+}
+.signupWrapper section:nth-child(2) form section {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+.signupWrapper section:nth-child(2) form section p {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+.signupWrapper section:nth-child(2) form section div {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.signupWrapper section:nth-child(2) form section div a {
+  width: 2rem;
+  height: 2rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.signupWrapper section:nth-child(2) form section div a:nth-child(1) {
+  background-image: url("../../public/google.png");
+}
+.signupWrapper section:nth-child(2) form section div a:nth-child(2) {
+  background-image: url("../../public/instagram.png");
+}
+.signupWrapper section:nth-child(2) form section div a:nth-child(3) {
+  background-image: url("../../public/f.svg");
+}/*# sourceMappingURL=signup.module.css.map */

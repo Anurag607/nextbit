@@ -1,0 +1,58 @@
+/* -----------------------------------EDITOR_PAGE-------------------------------------*/
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+  
+.main {
+    width: 100vw;
+    min-height: 100vh;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    .editor {
+        width: 100%;
+        height: auto;
+        padding-inline: 1rem;
+    }
+    .save_btn {
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(0,0,0,0.75);
+        border: 0.05rem solid transparent;
+        border-radius: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #ffffff;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        margin-bottom: 20vh;
+        &:hover {
+            background: #ffffff;
+            color: rgba(0,0,0,0.75);
+            border: 0.05rem solid rgba(0,0,0,0.75);
+        }
+    }
+}
+  
+  
+@media (max-width: 600px) {
+    .grid {
+        width: 100%;
+        flex-direction: column;
+    }
+}

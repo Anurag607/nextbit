@@ -1,0 +1,348 @@
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.dashboard {
+  transition: all 0.5s;
+  padding-block: 1rem;
+  -webkit-animation: opacity 1s linear;
+          animation: opacity 1s linear;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.dashboard section:nth-child(1) {
+  color: #37474f;
+  display: grid;
+  grid-auto-rows: minmax(0, 1fr);
+  grid-auto-columns: minmax(0, 1fr);
+  grid-template-areas: "one" "two" "two" "two" "two" "two" "three" "four";
+  background: #e8e8e8;
+  width: 22vw;
+  height: 95vh;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(1) div:not(.title) {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(1) div:not(.title) img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.dashboard section:nth-child(1) div:not(.title) span {
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s;
+  padding: 0;
+  border: 1px solid transparent;
+}
+.dashboard section:nth-child(1) .title {
+  grid-area: one;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: default;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(1) .title span {
+  color: #000080;
+}
+.dashboard section:nth-child(1) .title h3 {
+  color: #ff6984;
+}
+.dashboard section:nth-child(1) .title h1 {
+  color: #ffc30b;
+}
+.dashboard section:nth-child(1) .logout {
+  text-decoration: none;
+  color: #37474f;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  grid-area: four;
+  gap: 0.5rem;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(1) .logout img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.dashboard section:nth-child(1) .logout span {
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s;
+  padding: 0;
+  border: 1px solid transparent;
+}
+.dashboard section:nth-child(1) .logout span:hover {
+  border: 1px solid #37474f;
+  padding: 0.3rem 3rem;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(1) .home {
+  text-decoration: none;
+  color: #37474f;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  grid-area: three;
+  gap: 0.5rem;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(1) .home img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.dashboard section:nth-child(1) .home span {
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s;
+  padding: 0;
+  border: 1px solid transparent;
+}
+.dashboard section:nth-child(1) .home span:hover {
+  border: 1px solid #37474f;
+  padding: 0.3rem 3rem;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(2) {
+  color: #37474f;
+  display: grid;
+  grid-template-areas: "one one one one one one" "two two two two three three" "two two two two three three" "two two two two three three" "two two two two three three" "four four four four three three" "four four four four three three";
+  background: transparent;
+  width: 75vw;
+  height: 95vh;
+  gap: 0.75rem;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(2) div {
+  background: #e8e8e8;
+  border: transparent;
+  border-radius: 0.5rem;
+}
+.dashboard section:nth-child(2) .header {
+  color: #37474f;
+  grid-area: one;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 0 2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  gap: 1rem;
+  height: 15vh;
+  width: 70vw;
+  cursor: default;
+}
+.dashboard section:nth-child(2) .header img {
+  height: 2rem;
+  filter: opacity(0.75);
+}
+.dashboard section:nth-child(2) .profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  grid-area: two;
+  width: 50vw;
+  height: 45vh;
+  position: relative;
+}
+.dashboard section:nth-child(2) .profile .profileimg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 35%;
+  height: 85%;
+  background-image: url("../../public/profile.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 100%;
+  margin-left: 2rem;
+}
+.dashboard section:nth-child(2) .profile .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50%;
+  height: 100%;
+  gap: 0.5rem;
+  margin-left: 2rem;
+}
+.dashboard section:nth-child(2) .profile .info span {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  height: 17.5%;
+  width: 85%;
+  text-transform: capitalize;
+  background: #c5c5c5;
+  border-radius: 1rem;
+  cursor: default;
+}
+.dashboard section:nth-child(2) .profile .info span p {
+  margin-left: 7.5%;
+  width: 80%;
+}
+.dashboard section:nth-child(2) .profile .info .email {
+  text-transform: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.dashboard section:nth-child(2) .profile .info .email p {
+  font-size: 0.95rem;
+  width: 57.5%;
+  margin: 2.25%;
+}
+.dashboard section:nth-child(2) .profile .info .addr {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: auto;
+}
+.dashboard section:nth-child(2) .profile .info .addr p {
+  font-size: 0.75rem;
+  width: 57.5%;
+  margin-left: 5%;
+  padding-block: 0.5rem;
+}
+.dashboard section:nth-child(2) .orders {
+  grid-area: three;
+  width: 24.5vw;
+  min-height: 77.5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  overflow-y: scroll;
+  background-color: #ffffff;
+  cursor: default;
+}
+.dashboard section:nth-child(2) .orders .head {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 25vh;
+  width: 23.95vw;
+}
+.dashboard section:nth-child(2) .orders .head div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 25vh;
+  width: 14.37vw;
+  gap: 0.5rem;
+  position: relative;
+}
+.dashboard section:nth-child(2) .orders .head div:nth-child(1) span:nth-child(1) {
+  height: 20%;
+  width: 75%;
+  background: #c5c5c5;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(2) .orders .head div:nth-child(1) span:nth-child(2), .dashboard section:nth-child(2) .orders .head div:nth-child(1) span:nth-child(3), .dashboard section:nth-child(2) .orders .head div:nth-child(1) span:nth-child(4) {
+  height: 10%;
+  width: 75%;
+  background: #c5c5c5;
+  border-radius: 1rem;
+}
+.dashboard section:nth-child(2) .orders .head div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 40%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.dashboard section:nth-child(2) .orders .head div:nth-child(2) .itemImgPlaceholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  width: 75%;
+  height: 65%;
+  border-radius: 1rem;
+  border: 0.1rem dashed #c5c5c5;
+}
+.dashboard section:nth-child(2) .orders .head div:nth-child(2) .itemImgPlaceholder::after {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  translate: -50% -50%;
+  content: " +";
+  font-size: 5rem;
+  color: #c5c5c5;
+}
+.dashboard section:nth-child(2) .paymentDetails {
+  grid-area: four;
+  width: 50vw;
+  height: 30vh;
+  background-color: #e8e8e8;
+}/*# sourceMappingURL=dash.module.css.map */
