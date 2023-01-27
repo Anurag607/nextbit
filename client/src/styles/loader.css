@@ -1,14 +1,16 @@
 .loader {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: auto;
+    height: auto;
+    padding: 3.5rem;
+    position: relative;
   }
   
   .circle {
-    width: 200px;
-    height: 200px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     animation: colorfull-spin 2s alternate infinite;
     position: absolute;
@@ -18,64 +20,64 @@
     animation-delay: 0.1s;
     background: linear-gradient(45deg, #337aff, #572ff3, #e81f6c, #f1c726);
     background-size: 200%;
-    width: 180px;
-    height: 180px;
+    width: 80px;
+    height: 80px;
   }
   
   .circle:nth-child(2) {
     animation-delay: 0.2s;
     background: linear-gradient(45deg, #337aff, #572ff3, #e81f6c, #f1c726);
     background-size: 200%;
-    width: 160px;
-    height: 160px;
+    width: 70px;
+    height: 70px;
   }
   
   .circle:nth-child(3) {
     animation-delay: 0.3s;
     background: linear-gradient(45deg, #337aff, #572ff3, #e81f6c, #f1c726);
     background-size: 200%;
-    width: 140px;
-    height: 140px;
+    width: 60px;
+    height: 60px;
   }
   
   .circle:nth-child(4) {
     animation-delay: 0.4s;
     background: linear-gradient(45deg, #337aff, #572ff3, #e81f6c, #f1c726);
     background-size: 200%;
-    width: 120px;
-    height: 120px;
+    width: 50px;
+    height: 50px;
   }
   
   .circle:nth-child(5) {
     animation-delay: 0.5s;
     background: linear-gradient(45deg, #337aff, #572ff3, #e81f6c, #f1c726);
     background-size: 200%;
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
   }
   
   .circle:nth-child(6) {
     animation-delay: 0.6s;
     background: linear-gradient(45deg, #337aff, #572ff3, #e81f6c, #f1c726);
     background-size: 200%;
-    width: 80px;
-    height: 80px;
+    width: 30px;
+    height: 30px;
   }
   
   .circle:nth-child(7) {
     animation-delay: 0.7s;
     background: linear-gradient(45deg, #337aff, #572ff3, #e81f6c, #f1c726);
     background-size: 200%;
-    width: 60px;
-    height: 60px;
+    width: 20px;
+    height: 20px;
   }
   
   .circle:nth-child(8) {
     animation-delay: 0.8s;
     background: linear-gradient(45deg, #337aff, #572ff3, #e81f6c, #f1c726);
     background-size: 200%;
-    width: 40px;
-    height: 40px;
+    width: 10px;
+    height: 10px;
   }
   
   @keyframes colorfull-spin {

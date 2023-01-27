@@ -10,6 +10,7 @@ import Cookie from 'js-cookie'
 import { CloudImage } from '../../pages/api/cloudinary/CloudImage'
 import _ from 'lodash/debounce'
 import { NextApiRequest } from 'next'
+import Loader from '../../src/components/loader'
 
 const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cookieIntro} ) => {
 
@@ -63,6 +64,8 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
             }
             case 'introImage' : {
                 let file = (e.target as any as HTMLInputElement).files[0]
+                const loader:HTMLDivElement = document.querySelector('.loader')
+                loader.style.display = 'flex'
                 let data = new Promise(async (resolve, reject) => {
                     const response = await onFileChange(file)
                     resolve(response)
@@ -81,6 +84,8 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
             }
             case 'bgImage' : {
                 let file = (e.target as any as HTMLInputElement).files[0]
+                const loader:HTMLDivElement = document.querySelector('.loader')
+                loader.style.display = 'flex'
                 let data = new Promise(async (resolve, reject) => {
                     const response = await onFileChange(file)
                     resolve(response)
@@ -116,6 +121,8 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
     React.useEffect(() => {
         if(introImageURL.length > 0) {
             const el:HTMLDivElement = document.querySelector('.uploadedIntroImg')
+            const loader:HTMLDivElement = document.querySelector('.loader')
+            loader.style.display = 'none'
             el.style.height = "50vh"
             el.style.backgroundImage = `url('${introImageURL}')`
         }
@@ -124,6 +131,8 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
     React.useEffect(() => {
         if(bgImageURL.length > 0) {
             const el:HTMLDivElement = document.querySelector('.uploadedBgImg')
+            const loader:HTMLDivElement = document.querySelector('.loader')
+            loader.style.display = 'none'
             el.style.height = "50vh"
             el.style.backgroundImage = `url('${bgImageURL}')`
         }
@@ -167,7 +176,8 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
                                 <a href="https://www.freepik.com/" target="_blank">*For referrence you can search on <b>freepik.com</b></a>
                             </span>
                         </div>
-                        <div className={`${styles.uploadedImg} uploadedIntroImg`} style={{backgroundImage: `url('${introImageURL}')`}}/>
+                        <Loader />
+                        <div className={`${styles.uploadedImg} uploadedIntroImg`} style={{backgroundImage: `url('${introImageURL}')`}} />
                     </div>
                     <div className={`${styles.inputField} ${styles.bgImage}`}>
                         <div className={`${styles.inputDiv}`}>
@@ -177,6 +187,7 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
                                 <a href="https://unsplash.com/" target="_blank">*For referrence you can search on <b>unsplash.com</b></a>
                             </span>
                         </div>
+                        <Loader />
                         <div className={`${styles.uploadedImg} uploadedBgImg`} style={{backgroundImage: `url('${bgImageURL}')`}} />
                     </div>
                     <div>
