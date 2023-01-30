@@ -14,7 +14,7 @@ function Home( {posts, userDetails} ) {
 
   const router = useRouter()
 
-  const [article, setArticle] = React.useState((posts.length > 0) ? {
+  const [article, setArticle] = React.useState((posts !== undefined && posts !== null && posts.length > 0) ? {
     _id: posts[0]._id,
     author: posts[0].author,
     desc: posts[0].desc,
@@ -89,7 +89,7 @@ function Home( {posts, userDetails} ) {
   const Page = () => {
     return (
       <section className={styles.sidebar}>
-        {posts.map((el:Object,i:number) => {
+        {((posts !== undefined && posts !== null) ? posts : []).map((el:Object,i:number) => {
             return <Pagegen key={i} number={`0${i+1}`} id={i} />
         })}
       </section>
@@ -173,8 +173,9 @@ export async function getServerSideProps( {params, req, res} ) {
     mode: 'cors',
     headers: { 'Content-type' : 'application/json' }
   })
+  console.log(response)
   if (!response.ok) {
-    res.writeHead(302, {Location: '/nf'}).end()
+    // res.writeHead(302, {Location: '/nf'}).end()
     return {
       props : {}
     }
