@@ -24,6 +24,7 @@ connect(process.env.MONGO_URL, {
 .then(console.log("Connected to Database"))
 .catch(err => console.error(err.message))
 
+app.get('/hello', (_, res) => res.send('Hello World!'))
 app.use('/api/user', userRoutes)
 app.use('/api/posts', postRoutes)
 app.use('/api/comments', commentRoutes)

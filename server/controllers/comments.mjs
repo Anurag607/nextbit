@@ -1,7 +1,6 @@
 import {Comment} from '../models/comments.mjs'
 
 const createComment = async (req,res) => {
-    console.log(req.body)
     try {
         const saveComment = await new Comment(req.body)
         const savedComment = await saveComment.save()

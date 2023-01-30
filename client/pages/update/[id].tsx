@@ -154,8 +154,6 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
           bgImage: bgImageURL,
           introImage: introImageURL
         }
-
-        console.log(data)
     
         let status = 200
         const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/posts/updatePost/${id}`, {

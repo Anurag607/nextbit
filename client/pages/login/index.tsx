@@ -83,8 +83,7 @@ export default function Login() {
                 styling.username.current!.style.border = 'transparent'
                 styling.pass.current!.style.border = 'transparent'
                 styling.toSignup.current!.style.marginTop = '2.5rem'
-                let lastVisitedUrl = document.referrer.split('/')
-                console.log(lastVisitedUrl[lastVisitedUrl.length - 1])
+                // let lastVisitedUrl = document.referrer.split('/')
                 router.back()
             }
         })

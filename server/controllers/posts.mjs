@@ -30,7 +30,6 @@ const deletePost = async (req, res) => {
 
 const updatePost = async (req,res)=> {
     try {
-        console.log(req.body)
         const post = await Post.findById(req.params.id)
         if(post.userId === req.body.userId) {
             await post.updateOne({$set:req.body})

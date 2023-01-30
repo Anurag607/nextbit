@@ -201,8 +201,6 @@ export async function getServerSideProps( {params, req, res} ) {
     const postData = await postResponse.json()
     const commentData = await commentResponse.json()
 
-    console.log(postData)
-
     const introData = {
         title: (postData.title !== undefined) ? postData.title : '',
         desc: (postData.desc !== undefined) ? postData.desc : '',
