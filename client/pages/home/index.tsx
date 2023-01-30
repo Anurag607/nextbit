@@ -175,7 +175,7 @@ export async function getServerSideProps( {params, req, res} ) {
   })
   console.log(response)
   if (!response.ok) {
-    // res.writeHead(302, {Location: '/nf'}).end()
+    res.writeHead(302, {Location: '/nf'}).end()
     return {
       props : {}
     }

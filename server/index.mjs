@@ -30,5 +30,5 @@ app.use('/api/posts', postRoutes)
 app.use('/api/comments', commentRoutes)
 
 app.listen(PORT, () => {
-    console.log(`Server running on https://${HOST}:${PORT}`)
+    console.log(`Server running on ${process.env.RENDER}`)
 })

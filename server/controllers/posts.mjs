@@ -45,7 +45,6 @@ const updatePost = async (req,res)=> {
 }
 
 const getAllPosts = async (req,res) => {
-    console.log("Working!!!!")
     try {
         const posts = await Post.find()
         res.status(200).json(posts)
