@@ -62,6 +62,7 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
                     ...heroContent,
                     title: target.value
                 })
+                Cookie.set('introContent', JSON.stringify(heroContent))
                 break
             }
             case 'introImage' : {
@@ -109,6 +110,7 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
                     ...heroContent,
                     desc: target.value
                 })
+                Cookie.set('introContent', JSON.stringify(heroContent))
                 break
             }
             default : {
@@ -146,12 +148,14 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
         let data = {
           user_id: userDetails._id,
           author: userDetails.username,
-          desc: introContent.desc,
-          title: introContent.title,
-          content: (typeof localStorage.getItem('content') === 'undefined') ? post.content: localStorage.getItem('content'),
+          desc: heroContent.desc,
+          title: heroContent.title,
+          content: (typeof localStorage.getItem('content') === 'undefined') ? post.content : localStorage.getItem('content'),
           bgImage: bgImageURL,
           introImage: introImageURL
         }
+
+        console.log(data)
     
         let status = 200
         const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/posts/updatePost/${id}`, {
@@ -192,11 +196,11 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
                     if(userDetails.hasOwnProperty("username")) updatePost()
                 }}>
                     <div className={`${styles.inputField} ${styles.title}`}>
-                        <input type="text" id="title" name="title" value={heroContent.title} onChange={HandleChange} onKeyUp={() => Cookie.set('introContent', JSON.stringify(heroContent))} />
+                        <input type="text" id="title" name="title" value={heroContent.title} onChange={HandleChange} />
                         <label htmlFor={"title"}>{"title"}</label>
                     </div>
                     <div className={`${styles.inputField} ${styles.desc}`}>
-                        <textarea id="desc" name="desc" value={heroContent.desc} onChange={HandleChange} onKeyUp={() => Cookie.set('introContent', JSON.stringify(heroContent))} />
+                        <textarea id="desc" name="desc" value={heroContent.desc} onChange={HandleChange} />
                         <label htmlFor={"desc"}>{"description"}</label>
                     </div>
                     <div className={`${styles.inputField} ${styles.introImage}`}>

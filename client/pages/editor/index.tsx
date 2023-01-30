@@ -27,14 +27,13 @@ const Editor: NextPage<{userDetails: string, introContent: string, editorContent
       desc: introData.desc,
       title: introData.title,
       content: localStorage.getItem('content'),
-      bgImage: sessionStorage.getItem('bgImageURL'),
-      introImage: sessionStorage.getItem('introImageURL')
+      bgImage: Cookie.get('bgImageURL'),
+      introImage: Cookie.get('introImageURL')
     }
 
-    console.log(data)
     Cookie.set('currentPost', JSON.stringify(data))
 
-    let status = 201
+    let status = 200
     fetch(`${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/posts/createPost`, {
       method: "POST",
       mode: "cors",
@@ -42,13 +41,11 @@ const Editor: NextPage<{userDetails: string, introContent: string, editorContent
       body: JSON.stringify(data)
     }).then(response => {
       status = response.status
-      console.log(response)
       return response.json()
     }).then(resMessage => {
-      if (status == 201) {
-        console.log(resMessage)
-        Cookie.set('blog', resMessage)
+      if (status == 200) {
         router.push(`/blogPage/${resMessage._id}`, `/blogPage/${resMessage._id}`, {shallow: true})
+        Cookie.set('blog', resMessage)
       }
     })
   }

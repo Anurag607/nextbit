@@ -1,7 +1,6 @@
 import {Post} from '../models/posts.mjs'
 
 const createPost = async (req,res) => {
-    console.log(req.body)
     try {
         const savePost = await new Post(req.body)
         const savedPost = await savePost.save()
@@ -31,9 +30,10 @@ const deletePost = async (req, res) => {
 
 const updatePost = async (req,res)=> {
     try {
+        console.log(req.body)
         const post = await Post.findById(req.params.id)
         if(post.userId === req.body.userId) {
-            await Post.updateOne({$set:req.body})
+            await post.updateOne({$set:req.body})
             res.status(200).json({message: 'the post is updated'})
         } else {
             res.status(403).json({message: 'you can only update your post'})

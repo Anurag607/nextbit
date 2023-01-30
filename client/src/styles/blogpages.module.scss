@@ -76,7 +76,8 @@
                     text-align: left;
                 }
                 img {
-                    width: 40%;
+                    min-width: 40%;
+                    max-width: 100%;
                     height: auto;
                 }
             }

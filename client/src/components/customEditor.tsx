@@ -85,7 +85,7 @@ const CustomEditor = (props:propType) => {
     const editor = new EditorJS({
 
       holder: EDITTOR_HOLDER_ID,
-      data: ((typeof localContent === 'undefined') ? ((typeof content !== 'undefined') ? JSON.parse(content) : DEFAULT_INITIAL_DATA()) : ((localContent.length === 0) ? DEFAULT_INITIAL_DATA() : JSON.parse(localContent))),
+      data: ((localContent === undefined || localContent === null) ? ((content !== undefined && content !== null && content.length > 0 ) ? JSON.parse(content) : DEFAULT_INITIAL_DATA()) : ((localContent.length === 0) ? DEFAULT_INITIAL_DATA() : JSON.parse(localContent))),
       onReady: () => {
         isInstance.current = editor
       },
@@ -238,4 +238,4 @@ const CustomEditor = (props:propType) => {
 
 }
 
-export default CustomEditor;
+export default CustomEditor

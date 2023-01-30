@@ -9,7 +9,7 @@ export default function Home() {
 
     React.useEffect(() => {
         setTimeout(() => {
-            router.push('/nextbit/home', '/home', {shallow: true})
+            router.push('/home', '/home', {shallow: true})
         }, 2500)
     },[router])
 

@@ -11,14 +11,28 @@ import {postType} from '../../src/utils/postType'
 import {commentType} from '../../src/utils/commentsType'
 import { useRouter } from 'next/router'
 
+const DEFAULT_INITIAL_DATA = () => {
+    return {
+      "time": new Date().getTime(),
+      "blocks": [
+        {
+          "type": "paragraph",
+          "data": {
+            "placeholder": "Start Writing Here...",
+            "level": 1
+          }
+        },
+      ]
+    }
+}
+
 const BlogPage: NextPage<{userDetails: string, introContent: string, content: string, post: postType, comments: string}> = ( {userDetails, introContent, content, post, comments} ) => {
 
     const edjsParser = new editorjsHTML()
-
     const [postDetails, setPostDetails] = React.useState<postType>(post)
     const [hero, setHero] = React.useState((introContent !== '{}') ? JSON.parse(introContent) : {bgImage: postDetails.bgImage, desc: postDetails.desc, title: postDetails.title})
     const [auth, setAuth] = React.useState(JSON.parse(userDetails))
-    const [htmlStr, setHtmlStr] = React.useState<string[]>(edjsParser.parse(JSON.parse(post.content)))
+    const [htmlStr, setHtmlStr] = React.useState<string[]>(edjsParser.parse((post.content !== null && post.content !== undefined) ? JSON.parse(post.content) : DEFAULT_INITIAL_DATA()))
     const [comment, setComment] = React.useState({
         user_id: auth._id,
         user_name: auth.username,
@@ -186,6 +200,8 @@ export async function getServerSideProps( {params, req, res} ) {
     commentStatus  =commentResponse.status
     const postData = await postResponse.json()
     const commentData = await commentResponse.json()
+
+    console.log(postData)
 
     const introData = {
         title: (postData.title !== undefined) ? postData.title : '',

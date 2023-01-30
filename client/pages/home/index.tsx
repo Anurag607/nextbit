@@ -49,9 +49,13 @@ function Home( {posts, userDetails} ) {
   }
 
   React.useEffect(() => {
-    Cookie.remove('content', {path: ''})
-    Cookie.remove('introContent', {path: ''})
-    Cookie.remove('post_id', {path: ''})
+    Cookie.remove('content')
+    Cookie.remove('introContent')
+    Cookie.remove('introImageURL')
+    Cookie.remove('bgImageURL')
+    Cookie.remove('post_id')
+    localStorage.clear()
+    sessionStorage.clear()
     let currentPostIndex = Cookie.get('currentIndex') === undefined ? 0 : Cookie.get('currentIndex')
     if(currentPostIndex > posts.length-1) {
       Cookie.set('currentIndex', posts.length-1)
