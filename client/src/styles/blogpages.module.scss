@@ -21,6 +21,7 @@
         .hero {
             @include flex;
             height: 85vh;
+            max-height: 25rem;
             position: relative;
             width: 100vw;
             background-position: center;
@@ -310,6 +311,7 @@
                     width: 100%;
                     border-top: 0.05rem solid rgba(0,0,0,0.125);
                     border-right: none;
+                    padding: 2rem 2rem;
                 }
                 .author {
                     width: 100%;
@@ -373,7 +375,7 @@
                 div {
                     h2 {
                         width: 75%;
-                        font-size: 1.5rem;
+                        font-size: 2rem;
                     }
                 }
             }
@@ -466,7 +468,7 @@
                 div {
                     h2 {
                         width: 85%;
-                        font-size: 1.25rem;
+                        font-size: 1.75rem;
                     }
                 }
             }
