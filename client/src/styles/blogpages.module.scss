@@ -162,6 +162,7 @@
                         @include flex(row, 0.5rem);
                         text-transform: capitalize;
                         cursor: pointer;
+                        z-index: 1000;
                         span {
                             width: 2rem;
                             height: 2rem;
@@ -189,6 +190,7 @@
                         @include flex(row, 0.5rem);
                         text-transform: capitalize;
                         cursor: pointer;
+                        z-index: 1000;
                         span {
                             width: 2rem;
                             height: 2rem;

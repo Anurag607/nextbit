@@ -81,22 +81,23 @@ const CustomEditor = (props:propType) => {
   }
 
   const initEditor = () => {
-    let cookieContent = Cookie.get("content")
+    let localContent = localStorage.getItem('content')
     const editor = new EditorJS({
 
       holder: EDITTOR_HOLDER_ID,
-      data: ((typeof cookieContent === 'undefined') ? ((typeof content !== 'undefined') ? content : DEFAULT_INITIAL_DATA()) : ((cookieContent.legnth === 0) ? JSON.parse(content) : JSON.parse(cookieContent))),
+      data: ((typeof localContent === 'undefined') ? ((typeof content !== 'undefined') ? JSON.parse(content) : DEFAULT_INITIAL_DATA()) : ((localContent.length === 0) ? DEFAULT_INITIAL_DATA() : JSON.parse(localContent))),
       onReady: () => {
         isInstance.current = editor
       },
       onChange: _(function() {
         try {
           contents()
+          setTimeout(() => {
+            contents()
+          }, 1000)
         } catch(err) {
           console.error(err)
-        }
-        
-      },1500),
+        }}, 1500),
       autofocus: true,
       tools:{
         style: StyleInlineTool,
@@ -221,9 +222,9 @@ const CustomEditor = (props:propType) => {
 
     async function contents() {
       const output = await editor.save()
-      const content = JSON.stringify(output)
-      Cookie.set("content",content)
-      setContent(content) 
+      const outputString = JSON.stringify(output)
+      localStorage.setItem('content', outputString)
+      setContent(outputString)
     }
   }
       

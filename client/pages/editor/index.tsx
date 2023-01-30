@@ -26,7 +26,7 @@ const Editor: NextPage<{userDetails: string, introContent: string, editorContent
       author_email: auth.email,
       desc: introData.desc,
       title: introData.title,
-      content: Cookie.get('content'),
+      content: localStorage.getItem('content'),
       bgImage: sessionStorage.getItem('bgImageURL'),
       introImage: sessionStorage.getItem('introImageURL')
     }
@@ -48,7 +48,7 @@ const Editor: NextPage<{userDetails: string, introContent: string, editorContent
       if (status == 201) {
         console.log(resMessage)
         Cookie.set('blog', resMessage)
-        // router.push(`/blogPage/${resMessage._id}`, `/blogPage/${resMessage._id}`, {shallow: true})
+        router.push(`/blogPage/${resMessage._id}`, `/blogPage/${resMessage._id}`, {shallow: true})
       }
     })
   }

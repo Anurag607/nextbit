@@ -8,6 +8,7 @@ import Nav from '../../src/components/nav'
 import parseCookies from '../../src/scripts/cookieParser.mjs'
 import {useRouter} from 'next/router'
 import Cookie from 'js-cookie'
+import {selectPage, deselectAll} from '../../src/scripts/pagination.mjs'
 
 function Home( {posts, userDetails} ) {
 
@@ -34,6 +35,7 @@ function Home( {posts, userDetails} ) {
   })
 
   const Handlechange = (e: React.MouseEvent<HTMLSpanElement>) => {
+    Cookie.set('currentIndex', e.currentTarget.dataset.index)
     setArticle({
       _id: posts[e.currentTarget.dataset.index]._id,
       author: posts[e.currentTarget.dataset.index].author,
@@ -50,15 +52,34 @@ function Home( {posts, userDetails} ) {
     Cookie.remove('content', {path: ''})
     Cookie.remove('introContent', {path: ''})
     Cookie.remove('post_id', {path: ''})
-    console.log(userDetails)
+    let currentPostIndex = Cookie.get('currentIndex') === undefined ? 0 : Cookie.get('currentIndex')
+    if(currentPostIndex > posts.length-1) {
+      Cookie.set('currentIndex', posts.length-1)
+      currentPostIndex = posts.length-1
+    }
+    const page = document.querySelectorAll('.menubtn');
+    if(page[currentPostIndex] !== undefined) (page[currentPostIndex] as HTMLSpanElement).scrollIntoView({behavior: 'smooth'})
+    setArticle({
+      _id: posts[currentPostIndex]._id,
+      author: posts[currentPostIndex].author,
+      desc: posts[currentPostIndex].desc,
+      title: posts[currentPostIndex].title,
+      content: posts[currentPostIndex].content,
+      bgImage: posts[currentPostIndex].bgImage,
+      introImage: posts[currentPostIndex].introImage,
+      createdAt: posts[currentPostIndex].createdAt
+    })
   }, []) // eslint-disable-line
 
   React.useEffect(() => {
-    menu()
-  },[posts])
+    let currentPostIndex = Cookie.get('currentIndex') === undefined ? 0 : Cookie.get('currentIndex')
+    const page = document.querySelectorAll('.menubtn');
+    if(page[currentPostIndex] !== undefined) (page[currentPostIndex] as HTMLSpanElement).scrollIntoView({behavior: 'smooth'})
+    selectPage(currentPostIndex)
+  },[article])
   
   const Pagegen = (props: {number: string, id: number}) => {
-    return <span onClick={Handlechange} className="menubtn" data-index={props.id-1}>{props.number}</span>
+    return <span onClick={Handlechange} className="menubtn" data-index={props.id}>{props.number}</span>
   }
   
   const Page = () => {
@@ -112,7 +133,7 @@ function Home( {posts, userDetails} ) {
               <div className={styles.postAuthor}> {article.author} </div>
             </div>
             <div className={styles.postTitle} style={{fontSize: (article.title.length > 70) ? '1.5rem' : '2.25rem'}}> {article.title}  </div>
-            <div style={{backgroundImage: `url(${article.bgImage})`}} className={styles.postImage} />
+            <div style={{backgroundImage: `url(${article.introImage})`}} className={styles.postImage} />
           </section>
           
           <section className={styles.posttext}>

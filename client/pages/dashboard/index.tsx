@@ -22,28 +22,42 @@ const Dashboard = ({auth, posts}: {auth: string, posts:postType[]}) => {
 
   const Posts = () =>  {
     return (
-      <div className={styles.posts}>
-        {posts.map((el,i) => {
-          return (
-            <Link href={`blogPage/${el._id}`} key={i}>
+      <>
+          {(posts.length > 0) ? 
+            <div className={styles.posts}>
+              {posts.map((el,i) => {
+                return (
+                  <Link href={`blogPage/${el._id}`} key={i}>
+                    <div className={styles.head}>
+                      <div>
+                        <span className={styles.desc}>{(el.title.length >= 60) ? `${el.title.slice(0,el.title.length/2)}...` : `${el.title}`}</span>
+                        <div>
+                          <span className={styles.createdAt}>
+                            <span>Created On:</span>
+                            {`${el.createdAt}`}
+                          </span>
+                          <span className={styles.updatedAt}>
+                            <span>Updated On:</span>
+                            {`${el.updatedAt}`}
+                          </span>
+                        </div>
+                      </div>
+                      <div className={`${styles.itemImg} itemImg`} style={{backgroundImage: `url('${(typeof el.introImage === 'string') ? el.introImage : '/casual2.jpg'}')`}} />
+                    </div>
+                  </Link>
+                )
+              })}
+            </div> : 
+            <div className={styles.noPosts}>
               <div className={styles.head}>
                 <div>
-                  <span className={styles.desc}>{(el.title.length >= 60) ? `${el.title.slice(0,el.title.length/2)}...` : `${el.title}`}</span>
-                  <div>
-                    <span className={styles.createdAt}>
-                      <span>Created On:</span>
-                      {`${el.createdAt}`}</span>
-                    <span className={styles.updatedAt}>
-                      <span>Updated On:</span>
-                      {`${el.updatedAt}`}</span>
-                  </div>
+                  <h1>{"Oops!"}</h1>
+                  <p>{"no posts available"}</p>
                 </div>
-                <div className={`${styles.itemImg} itemImg`} style={{backgroundImage: `url('${(typeof el.introImage === 'string') ? el.introImage : '/casual2.jpg'}')`}} />
               </div>
-            </Link>
-          )
-        })}
-      </div>
+            </div>
+          }
+      </>
     )
   }
 
@@ -81,7 +95,7 @@ const Dashboard = ({auth, posts}: {auth: string, posts:postType[]}) => {
           </a>
         </Link>
       </section>
-      <section id='profile' className={styles.profile}>
+      <section id='profile' className={styles.main}>
       <div className={styles.sidebarToggle}>
           <div className={styles.title}>
             <h2>N</h2>

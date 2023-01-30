@@ -27,6 +27,11 @@ const BlogPage: NextPage<{userDetails: string, introContent: string, content: st
         content: ''
     })
 
+    React.useEffect(() => {
+        Cookie.remove("introContent")
+        Cookie.remove('content')
+    })
+
     const router = useRouter()
     const {id} = router.query
 
@@ -182,7 +187,12 @@ export async function getServerSideProps( {params, req, res} ) {
     const postData = await postResponse.json()
     const commentData = await commentResponse.json()
 
-    console.log(commentData)
+    const introData = {
+        title: (postData.title !== undefined) ? postData.title : '',
+        desc: (postData.desc !== undefined) ? postData.desc : '',
+        introImage: (postData.introImage !== undefined) ? postData.introImage : '',
+        bgImage: (postData.bgImage !== undefined) ? postData.bgImage : ''
+    }
     
     if(!postResponse.ok && cookies) {
         res.writeHead(302, {Location: '/nf'}).end()
@@ -194,8 +204,8 @@ export async function getServerSideProps( {params, req, res} ) {
     return {
         props : {
             userDetails: (typeof cookies.currentLoggedIn !== 'undefined') ? cookies.currentLoggedIn : '{}',
-            introContent: (typeof cookies.introContent !== 'undefined') ? cookies.introContent : '{}',
-            content: (typeof cookies.content !== 'undefined') ? cookies.content : '',
+            introContent: JSON.stringify(introData),
+            content: (postData.content !== undefined) ? postData.content : (typeof cookies.content !== 'undefined') ? cookies.content : '',
             post: postData,
             comments: (typeof commentData !== 'undefined' && commentData !== null) ? JSON.stringify(commentData) : '[]'
         }

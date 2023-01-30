@@ -18,9 +18,11 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-connect(process.env.MONGO_URL)
-    .then(console.log("Connected to Database"))
-    .catch(err => console.error(err.message))
+connect(process.env.MONGO_URL, {
+    useNewUrlParser: true
+})
+.then(console.log("Connected to Database"))
+.catch(err => console.error(err.message))
 
 app.use('/api/user', userRoutes)
 app.use('/api/posts', postRoutes)

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import { userDetails } from '../../src/utils/userDetails'
 import styles from '../../src/styles/update.module.scss'
 import Nav from '../../src/components/nav'
 import parseCookies from '../../src/scripts/cookieParser.mjs'
@@ -11,6 +10,7 @@ import Cookie from 'js-cookie'
 import { CloudImage } from '../api/cloudinary/CloudImage'
 import _ from 'lodash/debounce'
 import {postType} from '../../src/utils/postType'
+import Loader from '../../src/components/loader'
 
 const CustomEditor = dynamic(()=>import('../../src/components/customEditor'),{ssr:false})
 
@@ -66,15 +66,17 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
             }
             case 'introImage' : {
                 let file = (e.target as any as HTMLInputElement).files[0]
+                let loader = document.querySelectorAll('.loader');
+                (loader[0] as HTMLDivElement).style.display = 'flex'
                 let data = new Promise(async (resolve, reject) => {
                     const response = await onFileChange(file)
                     resolve(response)
                 })
                 data.then((url:string) => {
-                    sessionStorage.setItem('introImageURL', url)
+                    Cookie.set('introImageURL', url)
                     SetintroImageURL(currState => currState = url)
                 })
-                let image = sessionStorage.getItem('introImageURL')
+                let image = Cookie.get('introImageURL')
                 setHeroContent({
                     ...heroContent,
                     introImage: image
@@ -84,15 +86,17 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
             }
             case 'bgImage' : {
                 let file = (e.target as any as HTMLInputElement).files[0]
+                let loader = document.querySelectorAll('.loader');
+                (loader[1] as HTMLDivElement).style.display = 'flex'
                 let data = new Promise(async (resolve, reject) => {
                     const response = await onFileChange(file)
                     resolve(response)
                 })
                 data.then((url:string) => {
                     SetbgImageURL(currState => currState = url)
-                    sessionStorage.setItem('bgImageURL', url)
+                    Cookie.set('bgImageURL', url)
                 })
-                let image = sessionStorage.getItem('bgImageURL')
+                let image = Cookie.get('bgImageURL')
                 setHeroContent({
                     ...heroContent,
                     bgImage: image
@@ -119,6 +123,8 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
     React.useEffect(() => {
         if(introImageURL.length > 0) {
             const el:HTMLDivElement = document.querySelector('.uploadedIntroImg')
+            let loader = document.querySelectorAll('.loader');
+            (loader[0] as HTMLDivElement).style.display = 'none'
             el.style.height = "50vh"
             el.style.backgroundImage = `url('${introImageURL}')`
         }
@@ -127,6 +133,8 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
     React.useEffect(() => {
         if(bgImageURL.length > 0) {
             const el:HTMLDivElement = document.querySelector('.uploadedBgImg')
+            let loader = document.querySelectorAll('.loader');
+            (loader[1] as HTMLDivElement).style.display = 'none'
             el.style.height = "50vh"
             el.style.backgroundImage = `url('${bgImageURL}')`
         }
@@ -140,9 +148,9 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
           author: userDetails.username,
           desc: introContent.desc,
           title: introContent.title,
-          content: (typeof Cookie.get('content') === 'undefined') ? post.content: Cookie.get('content'),
-          bgImage: introContent.bgImage,
-          introImage: introContent.introImage
+          content: (typeof localStorage.getItem('content') === 'undefined') ? post.content: localStorage.getItem('content'),
+          bgImage: bgImageURL,
+          introImage: introImageURL
         }
     
         let status = 200
@@ -199,6 +207,7 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
                                 <a href="https://www.freepik.com/" target="_blank" rel="noreferrer">*For referrence you can search on <b>freepik.com</b></a>
                             </span>
                         </div>
+                        <Loader />
                         <div className={`${styles.uploadedImg} uploadedIntroImg`} style={{backgroundImage: `url('${introImageURL}')`}}/>
                     </div>
                     <div className={`${styles.inputField} ${styles.bgImage}`}>
@@ -209,6 +218,7 @@ const Page: NextPage<{userDetails: string, introContent: string, content: string
                                 <a href="https://unsplash.com/" target="_blank" rel="noreferrer">*For referrence you can search on <b>unsplash.com</b></a>
                             </span>
                         </div>
+                        <Loader />
                         <div className={`${styles.uploadedImg} uploadedBgImg`} style={{backgroundImage: `url('${bgImageURL}')`}} />
                     </div>
                     <div className={styles.main}>
@@ -236,19 +246,26 @@ export async function getServerSideProps( {params, req, res} ) {
         
     postStatus = postResponse.status
     const postData = await postResponse.json()
+
+    const introData = {
+        title: (postData.title !== undefined) ? postData.title : '',
+        desc: (postData.desc !== undefined) ? postData.desc : '',
+        introImage: (postData.introImage !== undefined) ? postData.introImage : '',
+        bgImage: (postData.bgImage !== undefined) ? postData.bgImage : ''
+    }
     
     if(!postResponse.ok && cookies) {
         res.writeHead(302, {Location: '/nf'}).end()
         return {
-        props : {}
+            props : {}
         }
     }
 
     return {
         props : {
             userDetails: (typeof cookies.currentLoggedIn !== 'undefined') ? cookies.currentLoggedIn : '{}',
-            introContent: (typeof cookies.introContent !== 'undefined') ? cookies.introContent : '{}',
-            content: (typeof cookies.content !== 'undefined') ? cookies.content : '',
+            introContent: JSON.stringify(introData),
+            content: (postData.content !== undefined) ? postData.content : (typeof cookies.content !== 'undefined') ? cookies.content : '',
             post: postData
         }
     }

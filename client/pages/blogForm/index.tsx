@@ -63,17 +63,17 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
             }
             case 'introImage' : {
                 let file = (e.target as any as HTMLInputElement).files[0]
-                const loader:HTMLDivElement = document.querySelector('.loader')
-                loader.style.display = 'flex'
+                let loader = document.querySelectorAll('.loader');
+                (loader[0] as HTMLDivElement).style.display = 'flex'
                 let data = new Promise(async (resolve, reject) => {
                     const response = await onFileChange(file)
                     resolve(response)
                 })
                 data.then((url:string) => {
-                    sessionStorage.setItem('introImageURL', url)
+                    Cookie.set('introImageURL', url)
                     SetintroImageURL(currState => currState = url)
                 })
-                let image = sessionStorage.getItem('introImageURL')
+                let image = Cookie.get('introImageURL')
                 SetIntroContent({
                     ...introContent,
                     introImage: image
@@ -83,17 +83,17 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
             }
             case 'bgImage' : {
                 let file = (e.target as any as HTMLInputElement).files[0]
-                const loader:HTMLDivElement = document.querySelector('.loader')
-                loader.style.display = 'flex'
+                let loader = document.querySelectorAll('.loader');
+                (loader[1] as HTMLDivElement).style.display = 'flex'
                 let data = new Promise(async (resolve, reject) => {
                     const response = await onFileChange(file)
                     resolve(response)
                 })
                 data.then((url:string) => {
                     SetbgImageURL(currState => currState = url)
-                    sessionStorage.setItem('bgImageURL', url)
+                    Cookie.set('bgImageURL', url)
                 })
-                let image = sessionStorage.getItem('bgImageURL')
+                let image = Cookie.get('bgImageURL')
                 SetIntroContent({
                     ...introContent,
                     bgImage: image
@@ -120,8 +120,8 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
     React.useEffect(() => {
         if(introImageURL.length > 0) {
             const el:HTMLDivElement = document.querySelector('.uploadedIntroImg')
-            const loader:HTMLDivElement = document.querySelector('.loader')
-            loader.style.display = 'none'
+            let loader = document.querySelectorAll('.loader');
+            (loader[0] as HTMLDivElement).style.display = 'none'
             el.style.height = "50vh"
             el.style.backgroundImage = `url('${introImageURL}')`
         }
@@ -130,8 +130,8 @@ const Page: NextPage<{userDetails: string, cookieIntro}> = ( {userDetails, cooki
     React.useEffect(() => {
         if(bgImageURL.length > 0) {
             const el:HTMLDivElement = document.querySelector('.uploadedBgImg')
-            const loader:HTMLDivElement = document.querySelector('.loader')
-            loader.style.display = 'none'
+            let loader = document.querySelectorAll('.loader');
+            (loader[1] as HTMLDivElement).style.display = 'none'
             el.style.height = "50vh"
             el.style.backgroundImage = `url('${bgImageURL}')`
         }
