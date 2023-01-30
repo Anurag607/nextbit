@@ -26,7 +26,7 @@ connect(process.env.MONGO_URL, {
 
 app.get('/hello', (_, res) => res.send('Hello World!'))
 app.use('/api/user', userRoutes)
-app.use('/api/posts', postRoutes)
+app.get('/api/posts', postRoutes)
 app.use('/api/comments', commentRoutes)
 
 app.listen(PORT, () => {
