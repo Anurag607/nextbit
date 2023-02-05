@@ -4,7 +4,7 @@ import { createPost, updatePost, deletePost, getAllPosts, getOnePost, getAllPost
 
 const router = express.Router()
 router.use(morgan('dev'))
-router.use((rqe, res, next) => {
+router.use((req, res, next) => {
     console.log("Posts Router Running!")
     next()
 })

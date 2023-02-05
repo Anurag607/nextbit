@@ -5,7 +5,7 @@ import { registerUser, loginUser } from '../controllers/auth.mjs'
 
 const router = express.Router()
 router.use(morgan('dev'))
-router.use((rqe, res, next) => {
+router.use((req, res, next) => {
     console.log("Auth Router Running!")
     next()
 })

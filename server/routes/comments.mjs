@@ -4,7 +4,7 @@ import { createComment, getCommentbyPostId, getCommentbyAuthorId } from '../cont
 
 const router = express.Router()
 router.use(morgan('dev'))
-router.use((rqe, res, next) => {
+router.use((req, res, next) => {
     console.log("Comments Router Running!")
     next()
 })
