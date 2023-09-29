@@ -11,7 +11,7 @@ beforeEach(async done => {
   const db = cuid()
   function clearDB() {
     for (var i in mongoose.connection.collections) {
-      mongoose.connection.collections[i].remove(function() {})
+      mongoose.connection.collections[i].remove(function () { })
     }
     return done()
   }
