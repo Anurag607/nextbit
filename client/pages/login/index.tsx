@@ -1,152 +1,173 @@
-import React, { useCallback } from 'react'
-import {useRouter} from 'next/router'
-import Link from 'next/link'
-import Head from 'next/head'
-import styles from './login.module.scss'
-import Cookie from 'js-cookie'
+import React, { useCallback } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Head from "next/head";
+import styles from "./login.module.scss";
+import Cookie from "js-cookie";
 
 interface LoginForm extends HTMLFormControlsCollection {
-    username : HTMLInputElement,
-    password : HTMLInputElement
+  username: HTMLInputElement;
+  password: HTMLInputElement;
 }
 
 interface LoginFormEl extends HTMLFormElement {
-    readonly elements : LoginForm
+  readonly elements: LoginForm;
 }
 
-type template = { username : string, password : string }
+type template = { username: string; password: string };
 
 export default function Login() {
+  const router = useRouter();
 
-    const router = useRouter()
+  const styling = {
+    username: React.useRef<HTMLInputElement>(null),
+    pass: React.useRef<HTMLInputElement>(null),
+    warning: React.useRef<HTMLInputElement>(null),
+    toSignup: React.useRef<HTMLInputElement>(null),
+  };
 
-    const styling = {
-        username: React.useRef<HTMLInputElement>(null),
-        pass: React.useRef<HTMLInputElement>(null),
-        warning: React.useRef<HTMLInputElement>(null),
-        toSignup: React.useRef<HTMLInputElement>(null)
+  const [logindet, Setlogindet] = React.useState<template>({
+    username: "",
+    password: "",
+  });
+
+  const HandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let target = e.currentTarget;
+    switch (target.name) {
+      case "username": {
+        Setlogindet({
+          ...logindet,
+          username: target.value,
+        });
+        break;
+      }
+      case "password": {
+        Setlogindet({
+          ...logindet,
+          password: target.value,
+        });
+        break;
+      }
+      default: {
+        Setlogindet({
+          ...logindet,
+        });
+        break;
+      }
     }
+  };
 
-    const [logindet, Setlogindet] = React.useState<template>({
-        username : '',
-        password : ''
-    })
-
-    const HandleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-        let target = e.currentTarget
-        switch(target.name) {
-            case 'username' : {
-                Setlogindet({
-                    ...logindet,
-                    username : target.value
-                })
-                break
-            }
-            case 'password' : {
-                Setlogindet({
-                    ...logindet,
-                    password : target.value
-                })
-                break
-            }
-            default : {
-                Setlogindet({
-                    ...logindet,
-                })
-                break
-            }
-        }
-    }
-
-    const HandleSubmit = useCallback((e : React.FormEvent<LoginFormEl>) => {
-        e.preventDefault();
-        let status = 400
-        fetch(`${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/user/login`, {
-            method : 'POST',
-            mode : 'cors',
-            headers : {'Content-type' : 'application/json'},
-            body : JSON.stringify(logindet),
+  const HandleSubmit = useCallback(
+    (e: React.FormEvent<LoginFormEl>) => {
+      e.preventDefault();
+      let status = 400;
+      fetch(`${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/user/login`, {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(logindet),
+      })
+        .then((response) => {
+          status = response.status;
+          return response.json();
         })
-        .then((response)=> {
-            status = response.status
-            return response.json()
-        })
-        .then(resMessage => {
-            if(status !== 200) {
-                styling.warning.current!.style.display = 'block'
-                styling.username.current!.style.border = '0.05rem solid red'
-                styling.pass.current!.style.border = '0.05rem solid red'
-                styling.toSignup.current!.style.marginTop = '0.75rem'
-            } else {
-                Cookie.set("currentLoggedIn", JSON.stringify(resMessage), {expires: 0.125})
-                styling.warning.current!.style.display = 'none'
-                styling.username.current!.style.border = 'transparent'
-                styling.pass.current!.style.border = 'transparent'
-                styling.toSignup.current!.style.marginTop = '2.5rem'
-                // let lastVisitedUrl = document.referrer.split('/')
-                router.back()
-            }
-        })
-    },[logindet]) // eslint-disable-line
+        .then((resMessage) => {
+          if (status !== 200) {
+            styling.warning.current!.style.display = "block";
+            styling.username.current!.style.border = "0.05rem solid red";
+            styling.pass.current!.style.border = "0.05rem solid red";
+            styling.toSignup.current!.style.marginTop = "0.75rem";
+          } else {
+            Cookie.set("currentLoggedIn", JSON.stringify(resMessage), {
+              expires: 0.125,
+            });
+            styling.warning.current!.style.display = "none";
+            styling.username.current!.style.border = "transparent";
+            styling.pass.current!.style.border = "transparent";
+            styling.toSignup.current!.style.marginTop = "2.5rem";
+            router.back();
+          }
+        });
+    },
+    [logindet]
+  ); // eslint-disable-line
 
-    React.useEffect(() => {
-        let recentURL = document.referrer.split('/')
-        router.prefetch(`/${recentURL[recentURL.length - 1]}`)
-        if(Cookie.get('currentLoggedIn') !== undefined && Cookie.get('currentLoggedIn').hasOwnProperty('username')) router.push('/home', '/home', {shallow: true})
-    },[]) // eslint-disable-line
-
-    return (
-        <main className={styles.loginWrapper}>
-                <Head>
-                    <meta name="description" content="#" />
-                    <meta name="keywords" content="#" />
-                    <meta name="author" content="Deep" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-                    <meta name="Blog Generator" content="Generated by create next app" />
-                    <link rel = "icon" href = "/nb.png" type = "image/x-icon" />
-                    <title>NextBit</title>
-                </Head>
-            <div>
-                <form onSubmit={HandleSubmit}>
-                    <h2>Login</h2>
-                    <span className={styles.warning} ref={styling.warning}>Invalid Username or Password</span>
-                    <span>
-                        <label htmlFor='username'>
-                            Username: 
-                            <span className={styles.loginusername}>
-                                <span />
-                                <input value={logindet.username} onChange={HandleChange} name='username' ref={styling.username} id='username' type="username" placeholder='Enter your Username'/>
-                            </span>
-                        </label>
-                    </span>
-                    <span>
-                        <label htmlFor='password'>
-                            Password: 
-                            <span className={styles.loginpass}>
-                                <span />
-                                <input name='password' ref={styling.pass} id='password' value={logindet.password} onChange={HandleChange} type="password" placeholder='Enter your Password' />
-                            </span>
-                            {/* <span>
-                                Forgot your Password?
-                                <Link href='/passReset' passHref><a className={styles.loginLinks}>Reset Here</a></Link>
-                            </span> */}
-                        </label>
-                    </span>
-                    <input type='submit' placeholder='Login' value='Login' name='submit' className={styles.loginSubmit} />
-                    {/* <section>
-                        <p>Or Sign Up using </p>
-                        <div>
-                            <a href="#" />
-                            <a href="#" />
-                            <a href="#" />
-                        </div>
-                    </section> */}
-                    <span className={styles.toSignup} ref={styling.toSignup}>
-                        Dont have an account?
-                        <Link href='/signup' as='/signup' passHref><a className={styles.loginLinks}>Sign Up</a></Link>
-                    </span>
-                </form>
-            </div>
-        </main>
+  React.useEffect(() => {
+    let recentURL = document.referrer.split("/");
+    router.prefetch(`/${recentURL[recentURL.length - 1]}`);
+    if (
+      Cookie.get("currentLoggedIn") !== undefined &&
+      Cookie.get("currentLoggedIn").hasOwnProperty("username")
     )
+      router.push("/home", "/home", { shallow: true });
+  }, []); // eslint-disable-line
+
+  return (
+    <main className={styles.loginWrapper}>
+      <Head>
+        <meta name="description" content="#" />
+        <meta name="keywords" content="#" />
+        <meta name="author" content="Deep" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Blog Generator" content="Generated by create next app" />
+        <link rel="icon" href="/nb.png" type="image/x-icon" />
+        <title>NextBit</title>
+      </Head>
+      <div>
+        <form onSubmit={HandleSubmit}>
+          <h2>Login</h2>
+          <span className={styles.warning} ref={styling.warning}>
+            Invalid Username or Password
+          </span>
+          <span>
+            <label htmlFor="username">
+              Username:
+              <span className={styles.loginusername}>
+                <span />
+                <input
+                  value={logindet.username}
+                  onChange={HandleChange}
+                  name="username"
+                  ref={styling.username}
+                  id="username"
+                  type="username"
+                  placeholder="Enter your Username"
+                />
+              </span>
+            </label>
+          </span>
+          <span>
+            <label htmlFor="password">
+              Password:
+              <span className={styles.loginpass}>
+                <span />
+                <input
+                  name="password"
+                  ref={styling.pass}
+                  id="password"
+                  value={logindet.password}
+                  onChange={HandleChange}
+                  type="password"
+                  placeholder="Enter your Password"
+                />
+              </span>
+            </label>
+          </span>
+          <input
+            type="submit"
+            placeholder="Login"
+            value="Login"
+            name="submit"
+            className={styles.loginSubmit}
+          />
+          <span className={styles.toSignup} ref={styling.toSignup}>
+            Dont have an account?
+            <Link href="/signup" as="/signup" passHref>
+              <a className={styles.loginLinks}>Sign Up</a>
+            </Link>
+          </span>
+        </form>
+      </div>
+    </main>
+  );
 }

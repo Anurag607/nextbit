@@ -1,229 +1,296 @@
-import React from 'react'
-import Head from 'next/head'
-import type { NextPage } from 'next'
-import styles from '../../src/styles/blogpages.module.scss'
-import Nav from '../../src/components/nav'
-import parseCookies from '../../src/scripts/cookieParser.mjs'
-import Cookie from 'js-cookie'
-import editorjsHTML from 'editorjs-html'
-import Link from 'next/link'
-import {postType} from '../../src/utils/postType'
-import {commentType} from '../../src/utils/commentsType'
-import { useRouter } from 'next/router'
+import React from "react";
+import Head from "next/head";
+import type { NextPage } from "next";
+import styles from "../../src/styles/blogpages.module.scss";
+import Nav from "../../src/components/nav";
+import parseCookies from "../../src/scripts/cookieParser.mjs";
+import Cookie from "js-cookie";
+import editorjsHTML from "editorjs-html";
+import Link from "next/link";
+import { postType } from "../../src/utils/postType";
+import { commentType } from "../../src/utils/commentsType";
+import { useRouter } from "next/router";
 
 const DEFAULT_INITIAL_DATA = () => {
-    return {
-      "time": new Date().getTime(),
-      "blocks": [
-        {
-          "type": "paragraph",
-          "data": {
-            "placeholder": "Start Writing Here...",
-            "level": 1
-          }
+  return {
+    time: new Date().getTime(),
+    blocks: [
+      {
+        type: "paragraph",
+        data: {
+          placeholder: "Start Writing Here...",
+          level: 1,
         },
-      ]
-    }
-}
+      },
+    ],
+  };
+};
 
-const BlogPage: NextPage<{userDetails: string, introContent: string, content: string, post: postType, comments: string}> = ( {userDetails, introContent, content, post, comments} ) => {
-
-    const edjsParser = new editorjsHTML()
-    const [postDetails, setPostDetails] = React.useState<postType>(post)
-    const [hero, setHero] = React.useState((introContent !== '{}') ? JSON.parse(introContent) : {bgImage: postDetails.bgImage, desc: postDetails.desc, title: postDetails.title})
-    const [auth, setAuth] = React.useState(JSON.parse(userDetails))
-    const [htmlStr, setHtmlStr] = React.useState<string[]>(edjsParser.parse((post.content !== null && post.content !== undefined) ? JSON.parse(post.content) : DEFAULT_INITIAL_DATA()))
-    const [comment, setComment] = React.useState({
-        user_id: auth._id,
-        user_name: auth.username,
-        post_id: postDetails._id,
-        author_id: postDetails.user_id,
-        content: ''
-    })
-
-    React.useEffect(() => {
-        Cookie.remove("introContent")
-        Cookie.remove('content')
-    })
-
-    const router = useRouter()
-    const {id} = router.query
-
-    const styling = {
-        warning: React.useRef<HTMLSpanElement>(null)
-    }
-
-    const [allComments, setAllComments] = React.useState<commentType[]>(JSON.parse(comments))
-
-    const Comments = () => {
-        return (
-            <div className={styles.commentList}>
-                <h2>Comments&nbsp;:</h2>
-                {allComments.map((el, i) => {
-                    return (
-                        <div className={styles.container} key={i}>
-                            <div className={styles.date}>{el.createdAt}</div>
-                            <div className={styles.userName}>{el.user_name}</div>
-                            <div className={styles.comment}>{el.content}</div>
-                        </div>
-                    )
-                })}
-            </div>
-        )
-    }
-
-    const HandleSubmit = async (event:React.MouseEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        if(auth.hasOwnProperty("username")) {
-            styling.warning.current!.style.display = 'none'
-            await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/comments/createComment`, {
-                method: 'POST',
-                mode: 'cors',
-                headers: {'Content-type': 'application/json'},
-                body: JSON.stringify(comment)
-            })
-            router.reload()
-        } else {
-            styling.warning.current!.style.display = 'block'
+const BlogPage: NextPage<{
+  userDetails: string;
+  introContent: string;
+  content: string;
+  post: postType;
+  comments: string;
+}> = ({ userDetails, introContent, content, post, comments }) => {
+  const edjsParser = new editorjsHTML();
+  const [postDetails, setPostDetails] = React.useState<postType>(post);
+  const [hero, setHero] = React.useState(
+    introContent !== "{}"
+      ? JSON.parse(introContent)
+      : {
+          bgImage: postDetails.bgImage,
+          desc: postDetails.desc,
+          title: postDetails.title,
         }
-    }
-
-    const deletePost = async () => {    
-        let status = 200
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/posts/deletePost/${post._id}`, {
-          method: "DELETE",
-          mode: "cors",
-          headers: {"Content-type": "application/json"}
-        })
-
-        if(status === 200) {
-            router.push('/home', '/home', {shallow: true})
-        }
-    }
-
-    return (
-        <div className={styles.container}>
-            <Head>
-                <meta name="description" content="#" />
-                <meta name="keywords" content="#" />
-                <meta name="author" content="Deep" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
-                <meta name="Blog Generator" content="Generated by create next app" />
-                <link rel = "icon" href = "/nb.png" type = "image/x-icon" />
-                <title>NextBit | {hero.title}</title>
-            </Head>
-            
-            <Nav title='NextBit' auth={userDetails} />
-    
-            <div className={styles.main}>
-                <div className={styles.hero} style={{backgroundImage: `url("${hero.bgImage}")`}}>
-                    <div>
-                        <h2>{hero.title}</h2>
-                    </div>
-                </div>
-                <main className={`${styles.content} content`}>
-                    <div className={`${styles.blogContent} blogContent`}>
-                        <div className={styles.postInfo}>
-                            <div className={styles.createdAt}>
-                                Created On:
-                                <span>{postDetails.createdAt}</span>
-                            </div>
-                            <div className={styles.updatedAt}>
-                                Last Edited On:
-                                <span>{postDetails.updatedAt}</span>
-                            </div>
-                        </div>
-                        {htmlStr.map((el:string,i:React.Key) => {
-                            return (
-                                <div key={i} dangerouslySetInnerHTML={{__html: el}}></div>
-                            )
-                        })}
-                    </div>
-                    <aside className={`${styles.author} author`}>
-                        <div className={styles.authorDetails}>
-                            <div className={styles.profilePic} style={{backgroundImage:`url('/profile.webp')`}}/>
-                            <div>
-                                <div className={styles.name}>
-                                    <span>{postDetails.author}</span>
-                                </div>
-                                <div className={styles.email}>
-                                    Contact me at: 
-                                    <span>{postDetails.author_email}</span>
-                                </div>
-                            </div>
-                        </div>
-                        {(typeof auth.username !== 'undefined' && auth.name !== postDetails.author) ? <div className={styles.buttons}>
-                            <Link href={`/update/${postDetails._id}`}>
-                                <button className={styles.update}>
-                                    <span />
-                                    Update
-                                </button>
-                            </Link>
-                            <button className={styles.remove} onClick={deletePost}>
-                                <span />
-                                Delete
-                            </button>
-                        </div> : <></>}
-                    </aside>
-                </main>
-                <form className={styles.commentedOut} onSubmit={HandleSubmit}>
-                    <label htmlFor="comment">What are your thoughts?</label>
-                    <span className={styles.warning} ref={styling.warning}>you must be logged in before continuing</span>
-                    <textarea className={styles.commentBox} id="comment" name="comment" value={comment.content} placeholder="Write Here..." onChange={(event) => setComment({...comment, content: event.currentTarget.value})} required/>
-                    <div>
-                        <input type="submit" className={styles.submit} value="Submit"/>
-                    </div>
-                </form>
-                <Comments />
-            </div>
-        </div>
+  );
+  const [auth, setAuth] = React.useState(JSON.parse(userDetails));
+  const [htmlStr, setHtmlStr] = React.useState<string[]>(
+    edjsParser.parse(
+      post.content !== null && post.content !== undefined
+        ? JSON.parse(post.content)
+        : DEFAULT_INITIAL_DATA()
     )
-}
+  );
+  const [comment, setComment] = React.useState({
+    user_id: auth._id,
+    user_name: auth.username,
+    post_id: postDetails._id,
+    author_id: postDetails.user_id,
+    content: "",
+  });
 
-export async function getServerSideProps( {params, req, res} ) {
-    const cookies = parseCookies(req)
-    let postStatus = 200
-    let commentStatus = 200
-    const postResponse = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/posts/getPost/${params.id}`, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {'Content-type': 'application/json'}
-    })
-    
-    const commentResponse = await fetch(`${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/comments/getCommentbyPostId/${params.id}`, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {'Content-type': 'application/json'}
-    })
-    
-    postStatus = postResponse.status
-    commentStatus  =commentResponse.status
-    const postData = await postResponse.json()
-    const commentData = await commentResponse.json()
+  React.useEffect(() => {
+    Cookie.remove("introContent");
+    Cookie.remove("content");
+  });
 
-    const introData = {
-        title: (postData.title !== undefined) ? postData.title : '',
-        desc: (postData.desc !== undefined) ? postData.desc : '',
-        introImage: (postData.introImage !== undefined) ? postData.introImage : '',
-        bgImage: (postData.bgImage !== undefined) ? postData.bgImage : ''
-    }
-    
-    if(!postResponse.ok && cookies) {
-        res.writeHead(302, {Location: '/nf'}).end()
-        return {
-            props : {}
+  const router = useRouter();
+  const { id } = router.query;
+
+  const styling = {
+    warning: React.useRef<HTMLSpanElement>(null),
+  };
+
+  const [allComments, setAllComments] = React.useState<commentType[]>(
+    JSON.parse(comments)
+  );
+
+  const Comments = () => {
+    return (
+      <div className={styles.commentList}>
+        <h2>Comments&nbsp;:</h2>
+        {allComments.map((el, i) => {
+          return (
+            <div className={styles.container} key={i}>
+              <div className={styles.date}>{el.createdAt}</div>
+              <div className={styles.userName}>{el.user_name}</div>
+              <div className={styles.comment}>{el.content}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const HandleSubmit = async (event: React.MouseEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (auth.hasOwnProperty("username")) {
+      styling.warning.current!.style.display = "none";
+      await fetch(
+        `${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/comments/createComment`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(comment),
         }
+      );
+      router.reload();
+    } else {
+      styling.warning.current!.style.display = "block";
     }
+  };
 
+  const deletePost = async () => {
+    let status = 200;
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/posts/deletePost/${post._id}`,
+      {
+        method: "DELETE",
+        mode: "cors",
+        headers: { "Content-type": "application/json" },
+      }
+    );
+
+    if (status === 200) {
+      router.push("/home", "/home", { shallow: true });
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <meta name="description" content="#" />
+        <meta name="keywords" content="#" />
+        <meta name="author" content="Deep" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Blog Generator" content="Generated by create next app" />
+        <link rel="icon" href="/nb.png" type="image/x-icon" />
+        <title>NextBit | {hero.title}</title>
+      </Head>
+
+      <Nav title="NextBit" auth={userDetails} />
+
+      <div className={styles.main}>
+        <div
+          className={styles.hero}
+          style={{ backgroundImage: `url("${hero.bgImage}")` }}
+        >
+          <div>
+            <h2>{hero.title}</h2>
+          </div>
+        </div>
+        <main className={`${styles.content} content`}>
+          <div className={`${styles.blogContent} blogContent`}>
+            <div className={styles.postInfo}>
+              <div className={styles.createdAt}>
+                Created On:
+                <span>{postDetails.createdAt}</span>
+              </div>
+              <div className={styles.updatedAt}>
+                Last Edited On:
+                <span>{postDetails.updatedAt}</span>
+              </div>
+            </div>
+            {htmlStr.map((el: string, i: React.Key) => {
+              return (
+                <div key={i} dangerouslySetInnerHTML={{ __html: el }}></div>
+              );
+            })}
+          </div>
+          <aside className={`${styles.author} author`}>
+            <div className={styles.authorDetails}>
+              <div
+                className={styles.profilePic}
+                style={{ backgroundImage: `url('/profile.webp')` }}
+              />
+              <div>
+                <div className={styles.name}>
+                  <span>{postDetails.author}</span>
+                </div>
+                <div className={styles.email}>
+                  Contact me at:
+                  <span>{postDetails.author_email}</span>
+                </div>
+              </div>
+            </div>
+            {typeof auth.username !== "undefined" &&
+            auth.name !== postDetails.author ? (
+              <div className={styles.buttons}>
+                <Link href={`/update/${postDetails._id}`}>
+                  <button className={styles.update}>
+                    <span />
+                    Update
+                  </button>
+                </Link>
+                <button className={styles.remove} onClick={deletePost}>
+                  <span />
+                  Delete
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
+          </aside>
+        </main>
+        <form className={styles.commentedOut} onSubmit={HandleSubmit}>
+          <label htmlFor="comment">What are your thoughts?</label>
+          <span className={styles.warning} ref={styling.warning}>
+            you must be logged in before continuing
+          </span>
+          <textarea
+            className={styles.commentBox}
+            id="comment"
+            name="comment"
+            value={comment.content}
+            placeholder="Write Here..."
+            onChange={(event) =>
+              setComment({ ...comment, content: event.currentTarget.value })
+            }
+            required
+          />
+          <div>
+            <input type="submit" className={styles.submit} value="Submit" />
+          </div>
+        </form>
+        <Comments />
+      </div>
+    </div>
+  );
+};
+
+export async function getServerSideProps({ params, req, res }) {
+  const cookies = parseCookies(req);
+  let postStatus = 200;
+  let commentStatus = 200;
+  const postResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/posts/getPost/${params.id}`,
+    {
+      method: "GET",
+      mode: "cors",
+      headers: { "Content-type": "application/json" },
+    }
+  );
+
+  const commentResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_LOCALHOST_SERVER}/api/comments/getCommentbyPostId/${params.id}`,
+    {
+      method: "GET",
+      mode: "cors",
+      headers: { "Content-type": "application/json" },
+    }
+  );
+
+  postStatus = postResponse.status;
+  commentStatus = commentResponse.status;
+  const postData = await postResponse.json();
+  const commentData = await commentResponse.json();
+
+  const introData = {
+    title: postData.title !== undefined ? postData.title : "",
+    desc: postData.desc !== undefined ? postData.desc : "",
+    introImage: postData.introImage !== undefined ? postData.introImage : "",
+    bgImage: postData.bgImage !== undefined ? postData.bgImage : "",
+  };
+
+  if (!postResponse.ok && cookies) {
+    res.writeHead(302, { Location: "/nf" }).end();
     return {
-        props : {
-            userDetails: (typeof cookies.currentLoggedIn !== 'undefined') ? cookies.currentLoggedIn : '{}',
-            introContent: JSON.stringify(introData),
-            content: (postData.content !== undefined) ? postData.content : (typeof cookies.content !== 'undefined') ? cookies.content : '',
-            post: postData,
-            comments: (typeof commentData !== 'undefined' && commentData !== null) ? JSON.stringify(commentData) : '[]'
-        }
-    }
+      props: {},
+    };
+  }
+
+  return {
+    props: {
+      userDetails:
+        typeof cookies.currentLoggedIn !== "undefined"
+          ? cookies.currentLoggedIn
+          : "{}",
+      introContent: JSON.stringify(introData),
+      content:
+        postData.content !== undefined
+          ? postData.content
+          : typeof cookies.content !== "undefined"
+          ? cookies.content
+          : "",
+      post: postData,
+      comments:
+        typeof commentData !== "undefined" && commentData !== null
+          ? JSON.stringify(commentData)
+          : "[]",
+    },
+  };
 }
 
-export default BlogPage
+export default BlogPage;

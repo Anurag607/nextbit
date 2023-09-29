@@ -1,9 +1,0 @@
-hey everyone hope all of you are doing great .Today i would like to share with you some of my experiences with you folks about web development / game development. I have been a slowpoke and a major procastinator as i have seen various great projects wi=hich i could start but never did., I also gained some knowlegde about textures and shader details and how they work .
-
-One different thing which i wandered upon while exploring the field was the implementation of non euclidean physics in game as there are various amazing games which appear to not follow euclidean geometry but as it turns out it is just the sneaky game developers who use certain techniques to trick your brain .One such techniques is stencil buffer .
-
-it is a buffer in the graphics card which only stores shader of particular colour it is dedicated to so it can help you make a cube to have different images on different faces  of the cube as if it was interdimensional .
-
-Not only that there the use of virtual memory is of great emphasis on game development moslty the open world games as you cant load the full world of gta 5 in your puny ram 
-
-there comes the use of virtual memory through which the world pf the game is loaded in harddisk and is directly loaded when needed only a small portion of the game is actually loaded in the main memory .
